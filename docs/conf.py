@@ -149,8 +149,8 @@ html_static_path = ['_static']
 def setup(app):
    #app.add_javascript("custom.js")
    app.add_stylesheet('theme_overrides.css')
-   app.add_stylesheet('cookie_notice.css')
-   app.add_javascript('cookie_notice.js')
+#   app.add_stylesheet('cookie_notice.css')
+#   app.add_javascript('cookie_notice.js')
    app.add_config_value('target', 'sdk', 'env')
 
 
@@ -257,7 +257,7 @@ intersphinx_mapping = {'python': ('https://docs.python.org/', None),
     'bson': ('https://api.mongodb.com/python/current/', None),
     'networkx': ('https://networkx.github.io/documentation/stable/', None),
     'sysdocs_gettingstarted': ('https://docs.dwavesys.com/docs/latest/', None),
-    'oceandocs': ('https://docs.ocean.dwavesys.com/en/latest/', None),
+    'oceandocs': ('https://sdk-docs.readthedocs.io/en/latest/', None),
     }
 
 # sort documentation they way the appear in the source file
