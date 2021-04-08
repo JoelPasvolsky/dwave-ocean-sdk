@@ -316,7 +316,8 @@ github_map = {'dwavebinarycsp': 'dwavebinarycsp',
               'embedding': 'dwave-system',
               'tabu': 'dwave-tabu'}
 
-#f= open("info_sdk.txt","w+")
+f = open("info_sdk_bad.txt","w+")
+f2 = open("info_sdk_good.txt","w+")
 def linkcode_resolve(domain, info):
     """
     Find the URL of the GitHub source for dwave-ocean-sdk objects.
@@ -324,16 +325,22 @@ def linkcode_resolve(domain, info):
     # Based on https://github.com/numpy/numpy/blob/main/doc/source/conf.py
 
     if domain != 'py':
-        #f.write("\n  C: " + info['module'] + " -->" + info['fullname'])
+        f.write("\n  not PY: " + str(domain) + " --> " + str(info))
         return None
-
-    obj = sys.modules.get(info['module'])
+    
+    #print("\n" + str(info) + "  --> " + str(object))
+    
+    obj={}
+    obj_inx = 0
+    obj[obj_inx] = sys.modules.get(info['module'])
     for part in info['fullname'].split('.'):
+        obj_inx += 1
         try:
-            obj = getattr(obj, part)
+            obj[obj_inx] = getattr(obj[obj_inx - 1], part)
         except Exception:
-            #f.write("\n  Exception1: " + info['module'] + " -->" + info['fullname'])
-            return None
+            f.write("\n  Exception1: " + str(info) + "-->" + str(obj))
+            pass
+
 
     # strip decorators, which would resolve to the source of the decorator
     # possibly an upstream bug in getsourcefile, bpo-1764286
@@ -342,22 +349,29 @@ def linkcode_resolve(domain, info):
     except AttributeError:
         pass
     else:
-        obj = unwrap(obj)
+        for i in range(len(obj)):
+           obj[i] = unwrap(obj[i])
+    
+    for i in range(len(obj)-1, -1, -1): 
+        try: 
+           fn = inspect.getsourcefile(obj[i]) 
+           obj_inx = i 
+           if fn: 
+              break 
+        except: 
+           f.write("\n  Exception2: " + str(info))
+           pass 
 
+    linespec = ""
     try:
-        fn = inspect.getsourcefile(obj)
+        source, lineno = inspect.getsourcelines(obj[obj_inx])
+        linespec = "#L%d" % (lineno)
     except Exception:
-        #f.write("\n  Exception2: " + info['module'] + " -->" + info['fullname'])
-        return None
-
-    try:
-        source, lineno = inspect.getsourcelines(obj)
-        linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
-    except Exception:
-        lineno = ""
+        f.write("\n  Exception3: " + str(info) + "-->" + str(fn))
+        linespec = ""
 
     if not fn or not "site-packages" in fn:
-       #f.write("\n  NO FN: " + info['module'] + " -->" + info['fullname'])
+       f.write("\n  NO FN: " + str(info))
        return None
     
     if ".egg" in fn:
@@ -377,7 +391,7 @@ def linkcode_resolve(domain, info):
     else:
         fn = "https://github.com/dwavesystems/" + github_map[repo] + "/blob/master" + fn     
  
-    #f.write("\nLink: " + fn + "  --> " + linespec)
+    f2.write("\n" + str(info) + "  --> " + str(object))
 
     return fn + linespec
 
