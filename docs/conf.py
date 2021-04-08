@@ -325,7 +325,6 @@ def linkcode_resolve(domain, info):
     # Based on https://github.com/numpy/numpy/blob/main/doc/source/conf.py
 
     if domain != 'py':
-        f.write("\n  not PY: " + str(domain) + " --> " + str(info))
         return None
     
     #print("\n" + str(info) + "  --> " + str(object))
@@ -333,33 +332,32 @@ def linkcode_resolve(domain, info):
     obj={}
     obj_inx = 0
     obj[obj_inx] = sys.modules.get(info['module'])
+    if not obj[0]:
+        f.write("\n  NO OBJ: " + str(info))
     for part in info['fullname'].split('.'):
         obj_inx += 1
         try:
             obj[obj_inx] = getattr(obj[obj_inx - 1], part)
         except Exception:
-            f.write("\n  Exception1: " + str(info) + "-->" + str(obj))
+            if obj_inx == 1:
+                f.write("\n  NO ATTR: " + str(info) + "-->" + str(obj))
             pass
 
 
     # strip decorators, which would resolve to the source of the decorator
     # possibly an upstream bug in getsourcefile, bpo-1764286
-    try:
-        unwrap = inspect.unwrap
-    except AttributeError:
-        pass
-    else:
-        for i in range(len(obj)):
-           obj[i] = unwrap(obj[i])
+    for i in range(len(obj)):
+           obj[i] = inspect.unwrap(obj[i])
     
     for i in range(len(obj)-1, -1, -1): 
         try: 
            fn = inspect.getsourcefile(obj[i]) 
-           obj_inx = i 
            if fn: 
+              obj_inx = i
               break 
-        except: 
-           f.write("\n  Exception2: " + str(info))
+        except:
+           if i == 0: 
+               f.write("\n  NO SOURCEFILE: " + str(info))
            pass 
 
     linespec = ""
