@@ -302,8 +302,6 @@ read_the_docs_build = os.environ.get('READTHEDOCS', None) == 'True'
 
 if read_the_docs_build:
 
-    print("JOEL:", os.path.abspath('.')) 
-
     subprocess.call('cd ../minorminer/docs/; make cpp', shell=True)
 
 # Link to GitHub source
