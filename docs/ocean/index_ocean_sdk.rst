@@ -11,6 +11,8 @@ Ocean SDK
     ocean_index_get_started
     ocean_packages
     ocean_dwave_cli
+    ocean_release_notes
+    ocean_source_code
 
 .. sections-start-marker
 
@@ -31,7 +33,15 @@ Ocean\ |tm| software is a suite of tools for using
     .. grid-item-card:: :ref:`ocean_dwave_cli` 
          
         Command line interface (CLI) for installing the Ocean SDK and more.
+
+    .. grid-item-card:: :ref:`ocean_release_notes` 
          
+        Release notes for Ocean software's packages.
+
+    .. grid-item-card:: :ref:`ocean_source_code` 
+         
+        Links to Ocean software's packages.
+        
 .. sections-end-marker
 
 Example
