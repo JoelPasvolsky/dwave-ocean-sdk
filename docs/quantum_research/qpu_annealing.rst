@@ -7,18 +7,19 @@ Annealing Implementation and Controls
 This section describes how quantum annealing (QA) is implemented and features
 that allow you to control the annealing process\ [#]_.
 
-*   Per-qubit :ref:`anneal offsets<qpu_qa_anneal_offsets>`: adjust the standard
+*   Per-qubit :ref:`anneal offsets <qpu_qa_anneal_offsets>`: adjust the standard
     annealing path per qubit.
 *   :ref:`Global anneal schedule <qpu_qa_anneal_sched>`: enable mid-anneal
     :ref:`quench and pause <qpu_qa_anneal_sched_pause>`,
-    :ref:`reverse annealing<qpu_qa_anneal_sched_reverse>`, and
+    :ref:`reverse annealing <qpu_qa_anneal_sched_reverse>`, and
     :ref:`fast annealing <qpu_annealprotocol_fast>`.
 
 .. [#]
     Another feature that enables control of the annealing process, the
-    time-dependent gain applied to linear coefficients (biases), :math:`h_i`,
-    described in the |doc_solver_properties|_ guide, is currently used only
-    experimentally and not described here.
+    time-dependent gain, :ref:`parameter_qpu_h_gain_schedule`, applied to linear
+    coefficients (biases), :math:`h_i`, described in the
+    :ref:`qpu_solver_parameters` section, is currently used only experimentally
+    and not described here.
 
 .. _qpu_qa_implementation:
 
@@ -44,13 +45,12 @@ control required by the quantum Hamiltonian:
 where :math:`{\hat\sigma_{x,z}^{(i)}}` are Pauli matrices operating on a qubit
 :math:`q_i` (the quantum one-dimensional Ising spin), and nonzero values of
 :math:`h_i` and :math:`J_{i,j}` are limited to those available in the QPU graph;
-see the :ref:`QPU Architecture <sysdocs:getting_started_topologies>` section of
-the |doc_getting_started|_ guide.
+see the :ref:`QPU Architecture <qpu_topologies>` section.
 
 The quantum annealing process occurs between time :math:`t=0` and time
-:math:`t_f`, which users specify via the :ref:`sysdocs:param_anneal_time`
+:math:`t_f`, which users specify via the :ref:`parameter_qpu_annealing_time`
 parameter or according to a schedule set with the
-:ref:`sysdocs:param_anneal_sched` parameter. For simplicity, this is
+:ref:`parameter_qpu_anneal_schedule` parameter. For simplicity, this is
 parameterized as :math:`s`, the normalized anneal fraction, which ranges from 0
 to 1.
 
@@ -77,7 +77,7 @@ such that the classical spin states represent a low-energy solution.
 :numref:`Figure %s <annealing-functions>` shows how :math:`A` and :math:`B`
 change over time for a standard anneal.
 
-.. figure:: ../../_images/annealing-functions.png
+.. figure:: ../_images/annealing-functions.png
     :name: annealing-functions
     :height: 400 pt
     :width: 400 pt
@@ -131,7 +131,7 @@ and :math:`\Phi_{\rm CCJJ}(s)` is an external flux applied to every qubit's
 compound Josephson-junction structures to change the potential energy shape of
 the qubit.
 
-.. figure:: ../../_images/ip_vs_delta.png
+.. figure:: ../_images/ip_vs_delta.png
     :name: ip-delta
     :width: 80 %
     :alt: Graph showing I p plotted against delta q in gigahertz. Along its
@@ -236,7 +236,8 @@ problems with no linear biases (:math:`h=0`).
     to an ancillary qubit to which a :ref:`flux-bias offset <qpu_error_fix_fbo>`
     is applied.
 
-    See :ref:`an example <cb_qpu_flux_biases>` in the |doc_cookbook|_.
+    See :ref:`an example <qpu_config_emulate_with_fbo>` in the
+    :ref:`qpu_solver_configuration` section.
 
 .. _qpu_energy_scales:
 
@@ -269,7 +270,7 @@ linearly with time, :math:`A(s)` and :math:`B(s)` are produced by the linear
 growth of the signal :math:`c(s)` . A typical plot of :math:`A(c(s))` and
 :math:`B(c(s))` is shown in :numref:`Figure %s <fastAnnealSchedule>`.
 
-.. figure:: ../../_images/fast_anneal_schedule.png
+.. figure:: ../_images/fast_anneal_schedule.png
     :name: fastAnnealSchedule
     :height: 400 pt
     :width: 400 pt
@@ -291,7 +292,7 @@ growth of the signal :math:`c(s)` . A typical plot of :math:`A(c(s))` and
 
     If you are using the Leap quantum cloud service from |dwave_short|, you can
     find the :math:`A(s)` and :math:`B(s)` and :math:`c(s)` values for the QPUs
-    here: :ref:`sysdocs:doc_qpu_characteristics`. If you have an on-premises
+    here: :ref:`qpu_solver_properties_specific`. If you have an on-premises
     system, contact |dwave_short| to obtain the values for your system.
 
 .. _qpu_qa_freezeout:
@@ -328,7 +329,7 @@ points for several qubit network sizes. A network of logical qubits is created
 by coupling multiple qubits to a single central qubit using :math:`J = +1`; see
 the :ref:`qpu_ice_measure_2spin` section for more details.
 
-.. figure:: ../../_images/annealing-functions-cluster-annotated-5-us.png
+.. figure:: ../_images/annealing-functions-cluster-annotated-5-us.png
     :name: annealing_functions_5us
     :width: 80 %
     :alt: Graph showing representative annealing schedules with freezeout points
@@ -353,7 +354,7 @@ the :ref:`qpu_ice_measure_2spin` section for more details.
     right to left, respectively. Data shown are representative of |dwave_short|
     2X systems.
 
-.. figure:: ../../_images/annealing-functions-cluster-annotated-100-us.png
+.. figure:: ../_images/annealing-functions-cluster-annotated-100-us.png
     :name: annealing_functions_100us
     :width: 80 %
     :alt: Graph showing representative annealing schedules with freezeout points
@@ -390,7 +391,7 @@ earlier in the anneal, where :math:`I_p` is lower.
     statistics of a simple logical qubit transition can approximately determine
     the relative value of :math:`I_p` at freezeout.
 
-.. figure:: ../../_images/ip-vs-logical-qubit-size.png
+.. figure:: ../_images/ip-vs-logical-qubit-size.png
     :name: ip-vs-logical-qubit-size
     :width: 80 %
     :alt: Graph showing I p as a function of logical qubit cluster size and
@@ -438,14 +439,14 @@ is controlled via a global, time-dependent bias signal :math:`c(s)` that
 simultaneously modifies both :math:`A(s)` and :math:`B(s)`.
 :numref:`Figure %s <annealing-functions>` shows typical :math:`A(s)` and
 :math:`B(s)` across the annealing algorithm; values of :math:`A(s)`,
-:math:`B(s)`, and :math:`c(s)` for QPUs can be found on the
-:ref:`sysdocs:doc_qpu_characteristics` page.
+:math:`B(s)`, and :math:`c(s)` for QPUs can be found in the
+:ref:`qpu_solver_properties_specific` section.
 :numref:`Figure %s <anneal-bias-versus-anneal-fraction>` plots the annealing
 bias :math:`c(s)` versus :math:`s`. Because of the shape of the qubit energy
 potential, :math:`c(s)` is not linear in :math:`s` but is chosen to ensure that
 :math:`I_p(s)` grows linearly with :math:`s`.
 
-.. figure:: ../../_images/anneal-bias-versus-anneal-fraction.png
+.. figure:: ../_images/anneal-bias-versus-anneal-fraction.png
     :name: anneal-bias-versus-anneal-fraction
     :alt: Two graphs. The top graph shows c (anneal control bias) plotted
         against shows s (normalized annealing time). Along its horizontal axis
@@ -472,7 +473,7 @@ example of the annealing control bias with :math:`\delta c_i = 0.05` and
 :math:`\delta c_i = -0.05`. Note that the anneal offset is a *vertical* shift up
 or down in annealing control bias, not a shift in :math:`s`.
 
-.. figure:: ../../_images/anneal-bias-versus-anneal-fraction-with-offsets.png
+.. figure:: ../_images/anneal-bias-versus-anneal-fraction-with-offsets.png
     :name: anneal-bias-versus-anneal-fraction-with-offsets
     :alt: Graph showing c (anneal control bias) plotted against s (normalized
         annealing time). It compares the baseline anneal trajectory with an
@@ -505,7 +506,7 @@ offset :math:`\delta c_i` is that :math:`B(s)\rightarrow B_i(s)`.
 :numref:`Figure %s <delta-versus-anneal-fraction-with-offsets>` also shows
 typical :math:`B_i(s)` versus :math:`s` for the same set of :math:`\delta c_i`.
 
-.. figure:: ../../_images/delta-versus-anneal-fraction-with-offsets.png
+.. figure:: ../_images/delta-versus-anneal-fraction-with-offsets.png
     :name: delta-versus-anneal-fraction-with-offsets
     :alt: Graph showing the energy of A(s) and B(s) with and without positive
         and negative anneal offsets. Along its horizontal axis is s (normalized
@@ -541,7 +542,7 @@ been set without an applied offset, for several values of an offset
 :math:`J_{i,j}(\delta c_i,\delta c_j,s)/J` for several values of offsets
 :math:`\delta c_i, \delta c_j` applied to a pair of coupled qubits.
 
-.. figure:: ../../_images/hamiltonian-distortion-single-q.png
+.. figure:: ../_images/hamiltonian-distortion-single-q.png
     :name: hamiltonian-distortion-single-q
     :alt: Graph showing showing the distortion of the Hamiltonian for three
         different anneal offset values.	Along its horizontal axis is s
@@ -564,7 +565,7 @@ been set without an applied offset, for several values of an offset
     target parameter remains. Data shown are representative of |dwave_2kq|
     systems.
 
-.. figure:: ../../_images/hamiltonian-distortion-two-q.png
+.. figure:: ../_images/hamiltonian-distortion-two-q.png
     :name: hamiltonian-distortion-two-q
     :alt: Graph showing showing the distortion of the Hamiltonian for three
         different anneal offset values. Along its horizontal axis is s
@@ -615,8 +616,8 @@ parameter remains.
     :ref:`normalized annealing bias <qpu_annealprotocol_standard>` and its
     inverse. You can determine all values of :math:`c(s)` and :math:`c^{-1}` by
     smoothly approximating (e.g. linear interpolation) the discretized form of
-    :math:`c(s)` available for QPUs on the
-    :ref:`sysdocs:doc_qpu_characteristics` page.
+    :math:`c(s)` available for QPUs in the :ref:`qpu_solver_properties_specific`
+    section.
 
     The impact of offsets can be interpreted as perturbations of :math:`J` and
     :math:`h` values relative to a fixed schedule,
@@ -641,7 +642,7 @@ parameter remains.
             \frac{\delta c_i + \delta c_j}{2}
         ] J_{i,j}
 
-        h_i(s,\delta c_i) &\approx 
+        h_i(s,\delta c_i) &\approx
         [1 + \frac{d B(s)}{ds} (\frac{dc(s)}{ds})^{-1} \delta c_i] h_{i,j}.
 
 Anneal offsets may improve results for problems in which the qubits have
@@ -691,8 +692,8 @@ Pause and Quench
     the point specified.
 
 .. [#]
-    The :ref:`sysdocs:param_anneal_time` and :ref:`sysdocs:param_anneal_sched`
-    parameters are mutually exclusive.
+    The :ref:`parameter_qpu_annealing_time` and
+    :ref:`parameter_qpu_anneal_schedule` parameters are mutually exclusive.
 
 Unlike the :ref:`anneal offsets <qpu_qa_anneal_offsets>` feature---which allows
 you to control the annealing path of individual qubits separately---anneal
@@ -731,7 +732,7 @@ the varying patterns of :math:`B(t)` that appear in
             :math:`B(t)` is interrupted by a rapid 2-\ :math:`\mu s` quench
             halfway through.
 
-.. figure:: ../../_images/annealing_trajectories.png
+.. figure:: ../_images/annealing_trajectories.png
     :name: annealing_trajectories
     :width: 80 %
     :alt: Annealing trajectories
@@ -750,7 +751,7 @@ instance reported in [Dic2013]_ with a pause inserted. While pauses early or
 late in the anneal have no effect, a pause near the expected perturbative
 anticrossing produces a large increase in the ground-state success rate.
 
-.. figure:: ../../_images/16q-pause.png
+.. figure:: ../_images/16q-pause.png
     :name: 16q-pause
     :alt: Graph plotting ground-state success rate against pause start time. The
         horizontal axis shows the anneal fraction from 0.1 to 0.6, marked in
@@ -778,7 +779,7 @@ same 16-qubit instance with a quench added. The probability of obtaining ground
 state samples depends on when in the anneal the quench occurs, with later
 quenches more likely to obtain samples from the ground state.
 
-.. figure:: ../../_images/16q-quench.png
+.. figure:: ../_images/16q-quench.png
     :name: 16q-quench
     :alt: Graph plotting ground-state success rate against quench time. The
         horizontal axis shows the anneal fraction from 0.2 to 0.65, marked in
@@ -816,7 +817,7 @@ toward :math:`s=0`, and then return back up to :math:`s=1`.
 process where the system reverses to :math:`s = 0.5`, pauses for
 :math:`25  \ \mu s` at :math:`s = 0.5`, and ends at :math:`s=1`.
 
-.. figure:: ../../_images/reverse-annealing-pwl.png
+.. figure:: ../_images/reverse-annealing-pwl.png
     :name: reverse-annealing-pwl
     :width: 80 %
     :alt: Graph plotting a reverse anneal. The horizontal axis shows time in
@@ -851,8 +852,8 @@ Examples of how you might use reverse annealing include:
     Solutions*, |dwave_short| White Paper Series, no. 14-1018A-A, 2017.
 
 The reverse annealing interface uses three parameters:
-:ref:`sysdocs:param_anneal_sched` defines the waveform, :math:`s(t)`, and
-:ref:`sysdocs:param_initial_state` and :ref:`sysdocs:param_reinitialize_state`
+:ref:`parameter_qpu_anneal_schedule` defines the waveform, :math:`s(t)`, and
+:ref:`parameter_qpu_initial_state` and :ref:`parameter_qpu_reinitialize_state`
 control the system state at the start of an anneal.
 
 As for pause and quench, the reverse annealing schedule is controlled by a PWL
@@ -880,14 +881,14 @@ The following table shows the tuples that you submit to get the pattern in
     +-------------------------------+------------------------------------------+
 
 When supplying a reverse annealing waveform through
-:ref:`sysdocs:param_anneal_sched`, you must also supply the initial state to
+:ref:`parameter_qpu_anneal_schedule`, you must also supply the initial state to
 which the system is set. When multiple reads are requested in a single call to
 SAPI, you have two options for the starting state of the system. These are
-controlled by the :ref:`sysdocs:param_reinitialize_state` Boolean parameter:
+controlled by the :ref:`parameter_qpu_reinitialize_state` Boolean parameter:
 
 *   ``reinitialize_state=true`` (default)---Reinitialize the initial state for
     every anneal-readout cycle. Each anneal begins from the state given in the
-    :ref:`sysdocs:param_initial_state` parameter. Initialization time is
+    :ref:`parameter_qpu_initial_state` parameter. Initialization time is
     required before every anneal-readout cycle. The amount of time required to
     reinitialize varies by system.
 *   ``reinitialize_state=false``---Initialize only at the beginning, before the
@@ -895,7 +896,7 @@ controlled by the :ref:`sysdocs:param_reinitialize_state` Boolean parameter:
     final state of the qubits after the preceding cycle. Initialization time is
     required only once.
 
-The :ref:`sysdocs:param_reinitialize_state` parameter affects timing. See the
+The :ref:`parameter_qpu_reinitialize_state` parameter affects timing. See the
 :ref:`qpu_operation_timing` section for more information.
 
 .. _qpu_qa_anneal_sched_fast:
@@ -909,10 +910,11 @@ execute an anneal within the coherent regime; for example,
 :math:`0 \le t \le t_f=7~\text{ns}`. This is the anneal protocol used in
 experiments such as [Kin2022]_.
 
-Access this expanded range of annealing times by setting the :ref:`param_fast`
-parameter to ``True``. Provide the annealing timespan in either the
-:ref:`param_anneal_time` or the :ref:`param_anneal_sched` parameter. Anneal
-times must be within the range specified by the :ref:`property_fatr` property
+Access this expanded range of annealing times by setting the
+:ref:`parameter_qpu_fast_anneal` parameter to ``True``. Provide the annealing
+timespan in either the :ref:`parameter_qpu_annealing_time` or the
+:ref:`parameter_qpu_anneal_schedule` parameter. Anneal times must be within the
+range specified by the :ref:`property_qpu_fast_anneal_time_range` property
 for the selected QPU.
 
 See the :ref:`qpu_annealprotocol_fast` section for further details.

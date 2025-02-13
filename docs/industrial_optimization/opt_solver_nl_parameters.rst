@@ -4,6 +4,12 @@
 Nonlinear Solver Parameters
 ===========================
 
+This section describes the parameters of quantum-classical hybrid
+:ref:`nonlinear-model <concept_models_nonlinear>` solvers such as the Leap
+service's ``hybrid_nonlinear_program_version1``. For the properties that
+inform and restrict your use of the solver, see the
+:ref:`opt_solver_nl_properties` section.
+
 .. _parameter_nl_label:
 
 label
@@ -24,7 +30,7 @@ This example sets a label on a submitted problem.
 >>> model = bin_packing([3, 5, 1, 3], 7)
 >>> results = LeapHybridNLSampler().sample(model)    # doctest: +SKIP
 
-.. figure:: ../../_images/leap_problem_label.png
+.. figure:: ../_images/leap_problem_label.png
     :align: center
     :name: LeapProblemLabelNl
     :alt: Problem labels on dashboard.
@@ -41,7 +47,7 @@ model
 
 Ocean software's :class:`~dwave.optimization.model.Model` contains symbols
 and states for problems formulated as a
-:ref:`nonlinear model <oceandocs:intro_optimization>`.
+:ref:`nonlinear model <concept_models_nonlinear>`.
 
 Relevant Properties
 -------------------
@@ -57,8 +63,8 @@ Relevant Properties
 *   :ref:`property_nl_max_state_size` defines the maximum size of all states
     in a problem accepted by the solver.
 *   :ref:`property_nl_state_size_multiplier`,
-    :ref:`property_nl_num_nodes_multiplier`, 
-    :ref:`property_nl_num_nodes_state_size_multiplier`, and 
+    :ref:`property_nl_num_nodes_multiplier`,
+    :ref:`property_nl_num_nodes_state_size_multiplier`, and
     :ref:`property_nl_time_constant` are used in the internal estimate of the
     problem's minimum runtime.
 
@@ -97,8 +103,8 @@ Relevant Properties
 -------------------
 
 *   :ref:`property_nl_state_size_multiplier`,
-    :ref:`property_nl_num_nodes_multiplier`, 
-    :ref:`property_nl_num_nodes_state_size_multiplier`, and 
+    :ref:`property_nl_num_nodes_multiplier`,
+    :ref:`property_nl_num_nodes_state_size_multiplier`, and
     :ref:`property_nl_time_constant` are used in the internal estimate of the
     problem's minimum runtime.
 
@@ -114,4 +120,3 @@ This illustrative example configures a time limit of 6 seconds.
 >>> results = LeapHybridNLSampler().sample(
 ...     model,
 ...     time_limit=6)   # doctest: +SKIP
-   

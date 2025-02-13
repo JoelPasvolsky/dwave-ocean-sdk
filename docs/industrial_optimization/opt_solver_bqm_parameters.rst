@@ -4,6 +4,11 @@
 BQM Solver Parameters
 =====================
 
+This section describes the properties of quantum-classical hybrid
+:ref:`binary quadratic model <concept_models_bqm>` solvers such as the Leap
+service's ``hybrid_binary_quadratic_model_version2``. For the parameters
+you can configure, see the :ref:`opt_solver_bqm_parameters` section.
+
 .. _parameter_bqm_bqm:
 
 bqm
@@ -21,14 +26,15 @@ Relevant Properties
     variables for hybrid solvers.
 *   :ref:`property_bqm_maximum_number_of_biases` defines the maximum number of
     problem biases for hybrid solvers.
-*   :ref:`property_bqm_minimum_time_limit` and 
+*   :ref:`property_bqm_minimum_time_limit` and
     :ref:`property_bqm_maximum_time_limit_hrs` define the runtime duration for
     hybrid solvers.
 
 Example
 -------
 
-This illustrative example submits a BQM created from a QUBO to a hybrid BQM solver.
+This illustrative example submits a BQM created from a QUBO to a hybrid BQM
+solver.
 
 >>> from dwave.system import LeapHybridBQMSampler
 ...
@@ -49,10 +55,10 @@ h
 Relevant Properties
 -------------------
 
-*   :ref:`property_bqm_maximum_number_of_variables` defines the maximum number of problem
-    variables for hybrid solvers.
-*   :ref:`property_bqm_maximum_number_of_biases` defines the maximum number of problem
-    biases for hybrid solvers.
+*   :ref:`property_bqm_maximum_number_of_variables` defines the maximum number
+    of problem variables for hybrid solvers.
+*   :ref:`property_bqm_maximum_number_of_biases` defines the maximum number of
+    problem biases for hybrid solvers.
 
 Example
 -------
@@ -117,7 +123,7 @@ This illustrative example sets a label on a submitted problem.
 ...     bqm,
 ...     label="Simple example")  # doctest: +SKIP
 
-.. figure:: ../../_images/leap_problem_label.png
+.. figure:: ../_images/leap_problem_label.png
     :align: center
     :name: LeapProblemLabelBqm
     :alt: Problem labels on dashboard.
@@ -181,4 +187,3 @@ This illustrative example configures a time limit of 6 seconds.
 >>> sampleset = LeapHybridBQMSampler().sample_qubo(
 ...     Q,
 ...     time_limit=6) # doctest: +SKIP
-   

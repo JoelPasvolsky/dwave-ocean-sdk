@@ -6,17 +6,15 @@ Minor-Embedding: Best Practices
 
 The |dwave_short| QPU minimizes the energy of an Ising spin configuration
 whose pairwise interactions lie on the edges of a QPU
-:ref:`working graph <sysdocs:getting_started_topologies>`, such as the Pegasus
+:ref:`working graph <topologies_working_graph>`, such as the :term:`Pegasus`
 graph of an |dwave_5kq| system. To solve an Ising spin problem with arbitrary
 pairwise interaction structure, the corresponding graph must be
-:std:doc:`minor embedded <oceandocs:concepts/embedding>` into a QPU's graph.
+:term:`minor-embedded <minor embed>` into a QPU's graph.
 
 There are algorithms that can embed a problem of :math:`N` variables in at most
 :math:`N^2` qubits.
 
-Ocean software's
-:std:doc:`minorminer <oceandocs:docs_minorminer/source/sdk_index>` provides
-embedding tools.
+Ocean software's :ref:`minorminer <index_ minorminer>` provides embedding tools.
 
 This chapter presents the following embedding topics:
 
@@ -25,7 +23,7 @@ This chapter presents the following embedding topics:
     :local:
     :backlinks: none
 
-.. _cb_embedding_global_local:
+.. _qpu_embedding_global_local:
 
 Global Versus Local
 ===================
@@ -33,7 +31,7 @@ Global Versus Local
 *Global embedding* models each constraint as a BQM, adds all constraint models,
 and maps the aggregate onto the QPU graph. Advantages of this method are that it
 typically requires fewer qubits and shorter
-:std:doc:`chains <oceandocs:concepts/embedding>`.
+:term:`minor embedding <minor embed>`.
 
 *Locally structured embedding* models each constraint locally within a subgraph,
 places the local subgraphs within the QPU graph, and then connects variables
@@ -73,7 +71,7 @@ connected five-node graphs), sparsely interconnected.
     entire BQM is embedded using the
     :class:`~dwave.system.composites.EmbeddingComposite` class.
 
-.. figure:: ../../_images/embedding_three_k5s_local.png
+.. figure:: ../_images/embedding_three_k5s_local.png
     :name: embeddingThreeK5sLocal
     :alt: image
     :align: center
@@ -82,7 +80,7 @@ connected five-node graphs), sparsely interconnected.
     Example of local embedding for a BQM represented by a graph of three
     connected :math:`K_5` cliques.
 
-.. figure:: ../../_images/embedding_three_k5s_global.png
+.. figure:: ../_images/embedding_three_k5s_global.png
     :name: embeddingThreeK5sGlobal
     :alt: image
     :align: center
@@ -106,15 +104,14 @@ Further Information
 *   [Jue2016]_ discusses using FPGA-like routing to embed.
 *   [Ret2017]_ describes embedding quantum-dot cellular automata networks.
 
-.. _cb_embedding_chains:
+.. _qpu_embedding_chains:
 
 Chain Management
 ==================
 
 Similar to Lagrangian relaxation, you map a given problem's variable :math:`s_i`
-onto :std:doc:`chain <oceandocs:concepts/embedding>`
-:math:`\{q_i^{(1)}, \cdots, q_i^{(k)}\}` while encoding equality constraint
-:math:`q_i^{(j)} = q_i^{(j')}` as an Ising penalty
+onto :term:`chain` :math:`\{q_i^{(1)}, \cdots, q_i^{(k)}\}` while encoding
+equality constraint :math:`q_i^{(j)} = q_i^{(j')}` as an Ising penalty
 :math:`-M q_i^{(j)} q_i^{(j')}` of weight :math:`M > 0`.
 
 The following considerations and recommendations apply to chains.
@@ -131,12 +128,15 @@ The following considerations and recommendations apply to chains.
     of the search space. An effective procedure	incrementally updates weights
     until the equality constraints are satisfied.
 
-    See also the :ref:`cb_qpu_precision` section.
+    See also the :ref:`qpu_config_precision` section.
 
 Example
 -------
 
 This example embeds a BQM representing a 30-node
+
+.. todo:: Update the next line's xref
+
 :std:doc:`signed-social network <oceandocs:docs_dnx/reference/algorithms/social>`
 problem and then looks at the effects of different chain-strength settings.
 
@@ -186,15 +186,14 @@ enough so few chains are broken.
 Percentage of samples with >10% breaks is 0.0 and >0 is 17.5.
 
 You can also look at the embedding and histograms of solution energies using
-the Ocean software's
-:std:doc:`problem inspector <oceandocs:docs_inspector/sdk_index>` tool.
+the Ocean software's :ref:`problem inspector <index_inspector>` tool.
 
 >>> dwave.inspector.show(sampleset)                       # doctest: +SKIP
 
 :numref:`Figure %s <chainstrengthSsn30Embedding>` shows the BQM embedded in an
 |dwave_5kq| QPU.
 
-.. figure:: ../../_images/chainstrength_ssn30_embedding.png
+.. figure:: ../_images/chainstrength_ssn30_embedding.png
     :name: chainstrengthSsn30Embedding
     :alt: image
     :align: center
@@ -223,7 +222,7 @@ different chains strengths:
     >>> sampleset = sampler.sample(
     ...     bqm, num_reads=num_samples, chain_strength=scaled)  # doctest: +SKIP
 
-.. figure:: ../../_images/chainstrength_ssn30_histogram_auto.png
+.. figure:: ../_images/chainstrength_ssn30_histogram_auto.png
     :name: chainstrengthSsn30HistogramAuto
     :alt: image
     :align: center
@@ -231,7 +230,7 @@ different chains strengths:
 
     Energy histogram for the social-network problem with a chain strength of ~7.
 
-.. figure:: ../../_images/chainstrength_ssn30_histogram_1.png
+.. figure:: ../_images/chainstrength_ssn30_histogram_1.png
     :name: chainstrengthSsn30Histogram1
     :alt: image
     :align: center
@@ -239,7 +238,7 @@ different chains strengths:
 
     Energy histogram for the social-network problem with a chain strength of 1.
 
-.. figure:: ../../_images/chainstrength_ssn30_histogram_14.png
+.. figure:: ../_images/chainstrength_ssn30_histogram_14.png
     :name: chainstrengthSsn30Histogram14
     :alt: image
     :align: center
@@ -254,14 +253,13 @@ setting it too high distorts the problem.
 Further Information
 -------------------
 
-*   The :std:doc:`Multiple-Gate Circuit <oceandocs:examples/multi_gate>` example
-    in the :std:doc:`Ocean software documentation <oceandocs:index>` is a good
+*   The :ref:`Multiple-Gate Circuit <qpu_example_multigate>` example is a good
     introductory example of the effects of setting chain strengths.
 *   The
-    :std:doc:`Using the Problem Inspector <oceandocs:examples/inspector_graph_partitioning>`
+    :ref:`Using the Problem Inspector <qpu_example_inspector_graph_partitioning>`
     example demonstrates using the Ocean software's
-    :std:doc:`problem inspector <oceandocs:docs_inspector/sdk_index>` tool for
-    examining embeddings and setting chain strengths.
+    :ref:`problem inspector <index_inspector>` tool for examining embeddings and
+    setting chain strengths.
 
 *   [Rie2014]_ studies embedding and parameter setting, and their effects on
     problem solving in the context of optimization problems.
@@ -329,12 +327,12 @@ Example: Clique-Embedding a Sparse BQM
 a sparse `NetworkX <https://networkx.org/>`_ graph,
 :func:`~networkx.generators.small.chvatal_graph()`. This example embeds the BQM
 onto an |dwave_5kq| QPU in two ways: (1) using the standard
-:std:doc:`minorminer <oceandocs:docs_minorminer/source/sdk_index>` heuristic of
-the :class:`~dwave.system.composites.EmbeddingComposite` class and (2) using
+:ref:`minorminer <index_minorminer>` heuristic of the
+:class:`~dwave.system.composites.EmbeddingComposite` class and (2) using
 a clique embedding found by the
 :class:`~dwave.system.samplers.DWaveCliqueSampler` class.
 
-.. figure:: ../../_images/embedding_sparse_bqm.png
+.. figure:: ../_images/embedding_sparse_bqm.png
     :name: embeddingSparseBqm
     :alt: image
     :align: center
@@ -366,7 +364,7 @@ The following graphs show both embeddings:
 *   :numref:`Figure %s <embeddingSparseBqmClique>` is a clique embedding in
     which the BQM graph is a minor.
 
-.. figure:: ../../_images/embedding_sparse_bqm_not_clique.png
+.. figure:: ../_images/embedding_sparse_bqm_not_clique.png
     :name: embeddingSparseBqmNotClique
     :alt: image
     :align: center
@@ -374,7 +372,7 @@ The following graphs show both embeddings:
 
     Embedding found for the sparse graph of the problem.
 
-.. figure:: ../../_images/embedding_sparse_bqm_clique.png
+.. figure:: ../_images/embedding_sparse_bqm_clique.png
     :name: embeddingSparseBqmClique
     :alt: image
     :align: center
@@ -419,7 +417,7 @@ common elements, with connectivity then added as needed.
 Example
 -------
 
-.. raw:: latex
+.. circuitikz code to build the circuit for the next graphic
 
     \begin{figure}
     \begin{centering}
@@ -456,17 +454,15 @@ Example
 
     This small example pre-embeds three gates shown in Figure \ref{fig:embeddingThreeGates}.
 
-.. only:: html
+.. figure:: ../_images/embedding_three_gates.png
+    :name: embeddingThreeGatesHTML
+    :alt: image
+    :align: center
+    :scale: 90 %
 
-    .. figure:: ../../_images/embedding_three_gates.png
-        :name: embeddingThreeGatesHTML
-        :alt: image
-        :align: center
-        :scale: 90 %
+    Circuit of three Boolean gates.
 
-        Circuit of three Boolean gates.
-
-    This small example pre-embeds three Boolean gates.
+This small example pre-embeds three Boolean gates.
 
 You can embed a BQM representing an AND or OR gate in a repeating
 structure of the Pegasus topology, a :math:`K_{4,4}` biclique with additional
@@ -494,7 +490,7 @@ couplers connecting some horizontal and vertical qubits.
         'in21': [3075], 'out2': [3060], 'in22': [3000], 'in21': [180],
         'out2': [3015]}
 
-.. figure:: ../../_images/embedding_three_gates_preembedding.png
+.. figure:: ../_images/embedding_three_gates_preembedding.png
     :name: embeddingThreeGatesPreembedding
     :alt: image
     :align: center
@@ -524,9 +520,8 @@ an embedding for a given working graph. When you submit an embedding and specify
 a chain strength using the
 :class:`~dwave.system.composites.VirtualGraphComposite` class, it automatically
 calibrates the qubits in a chain to compensate for the effects of unintended
-biases---see
-:ref:`integrated control errors (ICE) 1 <sysdocs:qpu_ice_background_susceptibility>`---
-caused by QPU imperfections.
+biases---see :ref:`integrated control errors (ICE) 1 <qpu_ice_sources>`---caused
+by QPU imperfections.
 
 Further Information
 -------------------

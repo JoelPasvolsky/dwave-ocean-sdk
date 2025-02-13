@@ -15,14 +15,14 @@ This chapter presents guidance on the following topics:
     :local:
     :backlinks: none
 
-.. _cb_qpu_reads:
+.. _qpu_config_qpu_reads:
 
 Read-Anneal Cycles
 ==================
 
-The :ref:`sysdocs:gsg_solver_params` section of the |doc_getting_started|_ guide
-explains why you should always request multiple read-anneal cycles for problems
-you submit to a |dwave_short| QPU solver.
+The :ref:`qpu_basic_config_num_reads` section explains why you should always
+request multiple read-anneal cycles for problems you submit to a |dwave_short|
+QPU solver.
 
 As a guideline, equalizing your annealing and reading times is cost-effective.
 Increasing the number of reads can give better solutions, but improvements
@@ -32,7 +32,7 @@ the logarithm of the number of samples. If you were sampling from a
 lower-bounded distribution (e.g. containing a minimum-energy ground state),
 taking more samples beyond some number no longer improves the result.
 
-Increasing both annealing time and :ref:`sysdocs:param_num_reads` increases your
+Increasing both annealing time and :ref:`parameter_qpu_num_reads` increases your
 probability of success for a problem submission. The optimal combination of
 annealing time and number of reads to produce the best solution in a fixed time
 budget is problem dependent, and requires some experimentation.
@@ -41,11 +41,10 @@ Example
 -------
 
 This example submits the same BQM, randomly generated using the
-:std:doc:`dimod <oceandocs:docs_dimod/sdk_index>`
-:func:`~dimod.generators.ran_r` class and identically embedded in the same QPU,
-first with :code:`num_read=10000` and an anneal time of 1 :math:`\mu s` and then
-with :code:`num_reads=1000` and an anneal time of 50 :math:`\mu s`. The
-percentage of best solutions are compared.
+:ref:`dimod <index_dimod>` :func:`~dimod.generators.ran_r` class and identically
+embedded in the same QPU, first with :code:`num_read=10000` and an anneal time
+of 1 :math:`\mu s` and then with :code:`num_reads=1000` and an anneal time of
+50 :math:`\mu s`. The percentage of best solutions are compared.
 
 >>> from dwave.system import DWaveSampler, FixedEmbeddingComposite, EmbeddingComposite
 >>> import dimod
@@ -73,7 +72,7 @@ Best solutions are 4.0% of samples.
 :numref:`Figure %s <qpuConfAnnealVsReads>` shows energy histograms from this
 example's two submissions.
 
-.. figure:: ../../_images/qpu_conf_anneal_vs_reads.png
+.. figure:: ../_images/qpu_conf_anneal_vs_reads.png
     :name: qpuConfAnnealVsReads
     :alt: image
     :align: center
@@ -86,14 +85,14 @@ For this particular example, it makes sense to increase the anneal time at the
 expense of fewer anneal cycles (number of reads). That might not be true of
 other problems.
 
-.. _cb_qpu_gauge_transformations:
+.. _qpu_config_srt:
 
 Spin-Reversal (Gauge) Transforms
 ================================
 
 Coupling :math:`J_{i,j}` adds a small bias to qubits :math:`i` and :math:`j` due
-to leakage. This can become significant for chained qubits: see
-:ref:`integrated control errors (ICE) 1 <sysdocs:qpu_ice_background_susceptibility>`.
+to leakage. This can become significant for chained qubits: see the
+:ref:`integrated control errors (ICE) 1 <qpu_ice_sources>` section.
 Additionally, qubits are biased to some small degree in one direction or another
 due to QPU imperfections.
 
@@ -128,17 +127,17 @@ Note that increasing this number increases the total run time of the problem.
 Example
 -------
 
-This example solves Ocean software's
-:std:doc:`Boolean AND Gate example <oceandocs:examples/and>` using
-illustratively long chains for two of the variables (for reference, you can
-embed this AND gate onto three qubits on an |dwave_5kq| QPU). The first
-submission does not use spin-reversal transforms while the second does. An AND
-gate has four feasible states: :math:`x1, x2, out` should take values
-:math:`000, 010, 100, 111`. The example prints the percentage of samples found
-for each of the feasible states of all lowest-energy samples with unbroken
-chains (typically this example also produces a small number of solutions with
-broken chains). Ideally, for a perfectly balanced QPU, feasible states would be
-found in equal numbers: :code:`[25 25 25 25] percent`.
+This example solves the example in the
+:ref:`Boolean AND Gate example <qpu_example_and>` section using illustratively
+long chains for two of the variables (for reference, you can embed this AND gate
+onto three qubits on an |dwave_5kq| QPU). The first submission does not use
+spin-reversal transforms while the second does. An AND gate has four feasible
+states: :math:`x1, x2, out` should take values :math:`000, 010, 100, 111`.
+The example prints the percentage of samples found for each of the feasible
+states of all lowest-energy samples with unbroken chains (typically this example
+also produces a small number of solutions with broken chains). Ideally, for a
+perfectly balanced QPU, feasible states would be found in equal numbers:
+:code:`[25 25 25 25] percent`.
 
 .. note::
     The qubits selected below for chains are available on the particular
@@ -202,11 +201,12 @@ increased from about one second to about four seconds.
 
 **Further Information**
 
-*   |doc_processor|_ describes ICE in the |dwave_short| system.
+*   The :ref:`qpu_ice_overview` section describes ICE in the |dwave_short|
+    system.
 *   [Ray2016]_ about temperature estimation in quantum annealers also looks at
-    effects of spin-reversal transforms. 
+    effects of spin-reversal transforms.
 
-.. _cb_qpu_postprocessing:
+.. _qpu_config_postprocessing:
 
 Postprocessing
 ==============
@@ -232,7 +232,7 @@ break.
 :numref:`Figure %s <qpuPostprocessingChainBreaks>` shows the problem graph and
 its embedding in an |dwave_5kq| QPU.
 
-.. figure:: ../../_images/qpu_postprocessing_chain_breaks.png
+.. figure:: ../_images/qpu_postprocessing_chain_breaks.png
     :name: qpuPostprocessingChainBreaks
     :alt: image
     :align: center
@@ -240,7 +240,7 @@ its embedding in an |dwave_5kq| QPU.
 
     The problem graph (left) and a particular embedding on a QPU (right), with a
     broken chain, as displayed by the
-    :std:doc:`problem inspector <oceandocs:docs_inspector/sdk_index>`.
+    :ref:`problem inspector <index_inspector>`.
 
 The first submission uses the Ocean software's default postprocessing of chains
 to set a value for variable ``a``; the second submission discards samples with
@@ -286,12 +286,15 @@ broken chains.
 Example: Local Search
 ---------------------
 
-:std:doc:`dwave-greedy <oceandocs:docs_greedy/sdk_index>` provides an
-implementation of a steepest-descent solver,
-:class:`~greedy.sampler.SteepestDescentSolver`, for binary quadratic models.
+:ref:`dwave-samplers <index_samplers>` provides an implementation of a
+
+.. todo:: verify the class xref in the following line:
+
+steepest-descent solver, :class:`~dwave.samplers.SteepestDescentSampler`,
+for binary quadratic models.
 
 This example runs this classical algorithm initialized from QPU samples to find
-minima in the samples’ neighborhoods.
+minima in the samples' neighborhoods.
 
 >>> from dwave.system import DWaveSampler, EmbeddingComposite
 >>> from greedy import SteepestDescentSolver
@@ -307,7 +310,7 @@ minima in the samples’ neighborhoods.
 :numref:`Figure %s <qpuPostprocessingChainBreaks>` compare the results before
 and after the postprocessing.
 
-.. figure:: ../../_images/qpu_postprocessing_greedy.png
+.. figure:: ../_images/qpu_postprocessing_greedy.png
     :name: qpuPostprocessingGreedy
     :alt: image
     :align: center
@@ -320,11 +323,11 @@ Further Information
 -------------------
 
 *   The
-    :std:doc:`Postprocessing with a Greedy Solver <oceandocs:examples/pp_greedy>`
-    example in the :std:doc:`Ocean software documentation <oceandocs:index>` is
-    a similar example of using ``dwave-greedy``, but on a native problem.
+    :ref:`Postprocessing with a Greedy Solver <qpu_example_pp_greedy>`
+    example is a similar example of using ``SteepestDescentSolver``, but on a
+    native problem.
 
-.. _cb_qpu_precision:
+.. _qpu_config_precision:
 
 Imprecision of Biases
 =====================
@@ -386,7 +389,7 @@ extra qubits) by sharing the edge weight across these edges.
 :numref:`Figure %s <qpuImprecisionBiasDivided>` shows the embedded problem with
 the large-biased variable represented by qubit 3999.
 
-.. figure:: ../../_images/qpu_imprecision_bias_large.png
+.. figure:: ../_images/qpu_imprecision_bias_large.png
     :name: qpuImprecisionBiasLarge
     :alt: image
     :align: center
@@ -404,7 +407,7 @@ the large-biased variable represented by qubit 3999.
 :numref:`Figure %s <qpuImprecisionBiasDivided>` shows the embedded problem with
 the large-biased variable represented by four chained qubits.
 
-.. figure:: ../../_images/qpu_imprecision_bias_divided.png
+.. figure:: ../_images/qpu_imprecision_bias_divided.png
     :name: qpuImprecisionBiasDivided
     :alt: image
     :align: center
@@ -460,10 +463,11 @@ Further Information
 *   [Kin2014]_ discusses preprocessing more robust problem Hamiltonians on the
     |dwave_short| system.
 *   [Pud2014]_ and [Pud2015]_ discuss quantum error correction.
-*   |doc_processor|_ describes integrated control errors (ICE), measurement, and
-    effects; for example, quantization of digital to analog converters.
+*   The :ref:`qpu_errors` section describes integrated control errors (ICE),
+    measurement, and effects; for example, quantization of digital to analog
+    converters.
 
-.. _cb_qpu_problem_scale:
+.. _qpu_config_problem_scale:
 
 Problem Scale
 =============
@@ -471,7 +475,7 @@ Problem Scale
 In general, use the full range of :math:`h` and :math:`J` values available for
 the QPU when submitting a problem.
 
-Ocean software's default enabling of the :ref:`sysdocs:param_autoscale` solver
+Ocean software's default enabling of the :ref:`parameter_qpu_auto_scale` solver
 parameter automatically scales problems to make maximum use of the available
 ranges.
 
@@ -486,7 +490,7 @@ coefficients of 0 or 1 except for one variable with a linear coefficient of
 -100. (In practice your problem may have a minority of variables that have
 significantly different values from the majority.)
 
-.. figure:: ../../_images/qpu_scale_p12k44.png
+.. figure:: ../_images/qpu_scale_p12k44.png
     :name: qpuScaleP12k44
     :alt: image
     :align: center
@@ -522,7 +526,7 @@ The two figures below show the energies of returned solutions:
 *   :numref:`Figure %s <qpuScaleP12k44AfterFix>` is the (updated) BQM without
     the outsized bias.
 
-.. figure:: ../../_images/qpu_scale_p12k44_before_fix.png
+.. figure:: ../_images/qpu_scale_p12k44_before_fix.png
     :name: qpuScaleP12K44BeforeFix
     :alt: image
     :align: center
@@ -530,7 +534,7 @@ The two figures below show the energies of returned solutions:
 
     Energies of returned solutions for the original BQM with the outsized bias.
 
-.. figure:: ../../_images/qpu_scale_p12k44_after_fix.png
+.. figure:: ../_images/qpu_scale_p12k44_after_fix.png
     :name: qpuScaleP12k44AfterFix
     :alt: image
     :align: center
@@ -552,7 +556,7 @@ was run).
 In a fixed BQM, most variables keep the original coefficient values except for
 variables connected to the fixed variable. For this execution of the example,
 two connected variables' coefficients are changed to a value of 2 to account for
-the fixed variable. 
+the fixed variable.
 
 >>> bqm.fix_variable(bqm.variables[0], 1)           # doctest: +SKIP
 >>> set(bqm.quadratic.values()) | set(bqm.linear.values())      # doctest: +SKIP
@@ -560,7 +564,7 @@ the fixed variable.
 >>> print(bqm.linear.max()/max(qpu.properties["h_range"])) # doctest: +SKIP
 0.5
 
-.. _cb_qpu_anneal_schedule:
+.. _qpu_config_anneal_schedule:
 
 Annealing Schedule
 ==================
@@ -587,8 +591,8 @@ standard annealing schedule. The probability of obtaining ground state samples
 depends on when in the anneal the quench occurs, with later quenches more likely
 to obtain samples from the ground state.
 
-Supply the scheduling points using the :ref:`sysdocs:param_anneal_sched` solver
-parameter.
+Supply the scheduling points using the :ref:`parameter_qpu_anneal_schedule`
+solver parameter.
 
 Reverse Anneal
 --------------
@@ -606,7 +610,7 @@ QPU a 16-qubit system, which was studied in a
 `nature article <https://www.nature.com/articles/ncomms2920>`_. It has an energy
 gap of 4 between the classical ground state and excited states.
 
-.. figure:: ../../_images/qpu_anneal_schedule_16qubit.png
+.. figure:: ../_images/qpu_anneal_schedule_16qubit.png
     :name: qpuAnnealSchedule16qubit
     :alt: image
     :align: center
@@ -684,11 +688,11 @@ Print the percentage of ground states for a reverse anneal (of almost 100
 
 .. [#]
     On most executions, the
-    :std:doc:`minorminer <oceandocs:docs_minorminer/source/sdk_index>` package
-    finds an embedding with all chains of length 1. However, a typical embedding
-    looks like that of :numref:`Figure %s <qpuAnnealSchedule16qubitTypical>`.
+    :ref:`minorminer <index_minorminer>` package finds an embedding with all
+    chains of length 1. However, a typical embedding looks like that of
+    :numref:`Figure %s <qpuAnnealSchedule16qubitTypical>`.
 
-    .. figure:: ../../_images/qpu_anneal_schedule_16qubit_typical.png
+    .. figure:: ../_images/qpu_anneal_schedule_16qubit_typical.png
         :name: qpuAnnealSchedule16qubitTypical
         :alt: image
         :align: center
@@ -730,9 +734,10 @@ Further Information
 *   [Dic2013]_ discusses the anticrossing example.
 *   [Dwave5]_ is a white paper on reverse annealing.
 *   [Izq2022]_ shows the efficacy of mid-anneal pauses.
-*   The |doc_processor|_ guide describes varying the anneal schedule.
+*   The :ref:`qpu_qa_anneal_sched` section describes varying the anneal
+    schedule.
 
-.. _cb_qpu_anneal_offset:
+.. _qpu_config_anneal_offset:
 
 Anneal Offsets
 ==============
@@ -759,8 +764,8 @@ error, but expect that the appropriate offsets for two different qubits in the
 same problem to be within 0.2 normalized offset units of each other.
 
 Supply the array of offsets for the qubits in the system using the
-:ref:`sysdocs:param_ao` solver parameter with a length equal to the
-:ref:`sysdocs:property_num_qubits` property.
+:ref:`parameter_qpu_anneal_offsets` solver parameter with a length equal to the
+:ref:`property_qpu_num_qubits` property.
 
 Example: 3-Qubit System
 -----------------------
@@ -774,7 +779,7 @@ two states is dominant early in the anneal.
 :numref:`Figure %s <qpuAnnealOffsets3qubit>` shows the problem and a possible
 embedding in one particular |dwave_5kq| QPU.
 
-.. figure:: ../../_images/qpu_anneal_offsets_3qubit.png
+.. figure:: ../_images/qpu_anneal_offsets_3qubit.png
     :name: qpuAnnealOffsets3qubit
     :alt: image
     :align: center
@@ -784,9 +789,9 @@ embedding in one particular |dwave_5kq| QPU.
     A three-qubit system with a small energy gap between the ground state and
     first two excited states.
 
-:std:doc:`dimod <oceandocs:docs_dimod/sdk_index>`\ 's
-:class:`~dimod.reference.samplers.ExactSolver` shows the energies of the ground
-state, first two excited states, and remaining states:
+:ref:`dimod <index_dimod>`\ 's :class:`~dimod.reference.samplers.ExactSolver`
+shows the energies of the ground state, first two excited states, and remaining
+states:
 
 >>> from dimod import ExactSolver
 ...
@@ -847,7 +852,7 @@ and the ground state is found much more frequently.
 Example: 16-Qubit System
 ------------------------
 
-The example problem of the :ref:`cb_qpu_anneal_schedule` section improved
+The example problem of the :ref:`qpu_config_anneal_schedule` section improved
 solutions for a 16-qubit system, shown in
 :numref:`Figure %s <qpuAnnealSchedule16qubit>` embedded in an |dwave_5kq| QPU,
 which was studied in a
@@ -859,11 +864,11 @@ small-gap anticrossings), reducing the likelihood of finding the ground state.
 
 First, the problem is embedded onto a QPU such that each problem qubit is
 represented by a single qubit on the QPU. As explained in the
-:ref:`cb_qpu_anneal_schedule` section, on most executions, the
-:std:doc:`minorminer <oceandocs:docs_minorminer/source/sdk_index>` package finds
-an  embedding with all chains of length 1. However, a typical embedding looks
-like that of :numref:`Figure %s <qpuAnnealSchedule16qubitTypical>`. The
-following code finds a more visually intuitive embedding such as shown in
+:ref:`qpu_config_anneal_schedule` section, on most executions, the
+:ref:`minorminer <index_minorminer>` package finds an  embedding with all chains
+of length 1. However, a typical embedding looks like that of
+:numref:`Figure %s <qpuAnnealSchedule16qubitTypical>`. The following code finds
+a more visually intuitive embedding such as shown in
 :numref:`Figure %s <qpuAnnealSchedule16qubit>` above.
 
 >>> import itertools
@@ -900,7 +905,7 @@ following code finds a more visually intuitive embedding such as shown in
 :numref:`Figure %s <qpuAnnealOffsets16qubit>` shows the 16-qubit system embedded
 in an |dwave_5kq| QPU.
 
-.. figure:: ../../_images/qpu_anneal_offsets_16qubit.png
+.. figure:: ../_images/qpu_anneal_offsets_16qubit.png
     :name: qpuAnnealOffsets16qubit
     :alt: image
     :align: center
@@ -952,13 +957,13 @@ percentage of ground states found.
 Further Information
 -------------------
 
-*   |doc_processor|_ describes anneal offsets.
+*   The :ref:`qpu_qa_anneal_offsets` section describes anneal offsets.
 *   [Dwave3]_ describes boosting factoring using anneal oofsets.
 *   [Kin2016]_ discusses the use of anneal offsets.
 *   [Lan2017]_ shows the use of anneal offsets on several problems.
 *   [Tin2018]_ systematically applies anneal offsets to SAT problems.
 
-.. _cb_qpu_flux_biases:
+.. _qpu_config_emulate_with_fbo:
 
 Emulate Linear Biases with Flux-Bias Offsets
 ============================================
@@ -966,12 +971,12 @@ Emulate Linear Biases with Flux-Bias Offsets
 It is sometimes useful to represent linear coefficients on a problem's
 variables without setting biases on the corresponding qubits; for example, when
 running the :ref:`fast-anneal protocol <qpu_annealprotocol_fast>`. This protocol
-does not allow non-zero values for :ref:`param_h` or diagonal elements of
-:ref:`param_q`, so to represent part of a problem modeled, for example, as
-:math:`a_{1,2}x_1x_2 + a_2x_2` one needs to bias the qubit or qubits
+does not allow non-zero values for :ref:`parameter_qpu_h` or diagonal elements
+of :ref:`parameter_qpu_q`, so to represent part of a problem modeled, for
+example, as :math:`a_{1,2}x_1x_2 + a_2x_2` one needs to bias the qubit or qubits
 representing :math:`x_2` without applying a bias :math:`h_2=a_2.`
 
-You can use :ref:`param_flux_biases` for this purpose.
+You can use :ref:`parameter_qpu_flux_biases` for this purpose.
 
 Method 1: Coupling to an Ancilliary Qubit with Large Flux Bias
 --------------------------------------------------------------
@@ -979,9 +984,9 @@ Method 1: Coupling to an Ancilliary Qubit with Large Flux Bias
 Locate an unused neighboring qubit that can be coupled to the problem qubit,
 apply to this ancillary qubit a flux-bias offset of magnitude greater than
 :math:`JM_{\rm AFM} I_p / \Phi_0` (see equation
-:math:numref:`qpu_equation_quantum_hamiltonian` in the |doc_processor|_ guide),
-and set the coupling strength between the problem and ancillary qubits equal to
-the needed linear bias.
+:math:numref:`qpu_equation_quantum_hamiltonian` in the :ref:`qpu_annealing`
+section), and set the coupling strength between the problem and ancillary qubits
+equal to the needed linear bias.
 
 :numref:`Figure %s <fluxBiasOffsetsHVsJ>` shows the probability of state
 :math:`-1` for a qubit, :math:`q_1`, annealed 1000 times for each value, in
@@ -998,7 +1003,7 @@ As is seen, directly biasing the problem qubit, :math:`q_1`, with  linear bias
 :math:`q_2` with a coupling strength of :math:`J_{1,2}`, as long as the
 magnitude of the flux-bias offset is high enough.
 
-.. figure:: ../../_images/flux_bias_offset_h_vs_j.png
+.. figure:: ../_images/flux_bias_offset_h_vs_j.png
     :name: fluxBiasOffsetsHVsJ
     :alt: image
     :align: center
@@ -1042,6 +1047,9 @@ Alternatively, set directly on the problem qubit a flux-bias offset that is
 closest to an equivalent of the needed linear bias. Although the dynamics of
 :math:`h` and flux bias (constant in time) differ, equivalence at a specific
 point in the anneal is valid under some assumptions. Ocean software provides
+
+.. todo:: update the following xref
+
 :std:doc:`conversion functions <oceandocs:docs_system/reference/utilities>`
 between :math:`h` and flux biases.
 
@@ -1056,7 +1064,7 @@ range :math:`[-1.0, 1.0]`, of these two methods of biasing its outcome:
     :func:`~dwave.system.temperatures.h_to_fluxbias` function on the same range
     of :math:`h`.
 
-.. figure:: ../../_images/flux_bias_offset_h_vs_fb.png
+.. figure:: ../_images/flux_bias_offset_h_vs_fb.png
     :name: fluxBiasOffsetsHVsFB
     :alt: image
     :align: center
@@ -1080,10 +1088,10 @@ above.
 >>> h_1 = 0.25
 ...
 >>> fb = [0]*qpu.properties['num_qubits']
->>> sampleset1 = qpu.sample_ising({q: h_1}, {}, num_reads=1000, auto_scale=False, 
+>>> sampleset1 = qpu.sample_ising({q: h_1}, {}, num_reads=1000, auto_scale=False,
 ...                              answer_mode="raw", flux_biases=fb)
 >>> fb[q] = h_to_fluxbias(h_1, B=1.391, MAFM=1.647)
->>> sampleset2 = qpu.sample_ising({q: 0}, {}, num_reads=1000, 
+>>> sampleset2 = qpu.sample_ising({q: 0}, {}, num_reads=1000,
 ...                              auto_scale=False, answer_mode="raw", flux_biases=fb)
 >>> sample1 = sampleset1.record.sample
 >>> sample2 = sampleset2.record.sample
@@ -1094,9 +1102,9 @@ above.
 
 For QPU-specific parameters such as the quantum crossing point and the maximum
 mutual inductance between qubits, :math:`M_{AFM}`, see the
-:ref:`doc_qpu_characteristics` page.
+:ref:`qpu_solver_properties_specific` section.
 
-.. _cb_qpu_anneal_gap:
+.. _qpu_config_anneal_gap:
 
 Energy Gap
 ==========
@@ -1189,7 +1197,7 @@ Further Information
 *   [Pud2014]_ and [Pud2015]_ discuss error suppression techniques using
     auxiliary qubits and the energy gap.
 
-.. _cb_qpu_neighbors:
+.. _qpu_config_neighbor_interactions:
 
 Neighbor Interactions
 =====================

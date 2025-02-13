@@ -74,9 +74,9 @@ embedding.
 Example Requirements
 ====================
 
-.. include:: hybrid_solver_service.rst
-  :start-after: example-requirements-start-marker
-  :end-before: example-requirements-end-marker
+.. include:: ../shared/examples.rst
+    :start-after: start_requirements
+    :end-before: end_requirements
 
 For the optional graphics, you will also need the non-open-source
 :doc:`problem-inspector </docs_inspector/sdk_index>` Ocean package, 
@@ -233,9 +233,9 @@ Configure a quantum computer as a sampler using both the
 embedding, and the :class:`~dwave.system.samplers.DWaveCliqueSampler` composed
 sampler, for clique embedding.
 
-.. include:: min_vertex.rst
-   :start-after: default-config-start-marker
-   :end-before: default-config-end-marker
+.. include:: ../shared/examples.rst
+    :start-after: start_default_solver_config
+    :end-before: end_default_solver_config
 
 >>> from dwave.system import DWaveSampler, EmbeddingComposite, DWaveCliqueSampler
 ...

@@ -1,3 +1,34 @@
+.. start_requirements
+
+The code in this example requires that your development environment have
+:ref:`Ocean software <index_ocean_sdk>` and be configured to access SAPI, as
+described in the :ref:`ocean_sapi_access_basic` section.
+
+.. end_requirements
+
+
+.. |workflow_section| replace:: The :ref:`qpu_workflow` section
+
+.. start_standard_steps
+
+|workflow_section| describes the problem-solving workflow as consisting of two
+main steps: (1) Formulate the problem as an :term:`objective function` in a
+:ref:`supported model <concept_models>` and (2) Solve your model with a
+|dwave_short| :term:`solver`.
+
+.. end_standard_steps
+
+
+.. start_default_solver_config
+
+.. note:: The following code sets a sampler without specifying :term:`SAPI`
+    parameters. Configure a default :term:`solver`, as described in the
+    :ref:`ocean_sapi_access_basic` section, to run the code as is, or see the
+    :ref:`dwave-cloud-client <index_cloud>` tool on how to access a particular
+    solver by setting explicit parameters in your code or environment variables.
+
+.. end_default_solver_config
+
 
 .. start_qpu1
 
@@ -12,10 +43,11 @@ The following code solves a random problem on a quantum computer.
 
 .. end_qpu1
 
+
 .. start_qpu2
 
-The following code solves the known "minimum vertex cover" 
-graph problem using an annealing quantum computer.   
+The following code solves the known "minimum vertex cover"
+graph problem using an annealing quantum computer.
 
 >>> import networkx as nx
 >>> import dwave_networkx as dnx
@@ -27,11 +59,12 @@ graph problem using an annealing quantum computer.
 
 .. end_qpu2
 
+
 .. start_nl1
 
-The following code solves an illustrative 
+The following code solves an illustrative
 `traveling-salesperson problem <https://en.wikipedia.org/wiki/Travelling_salesman_problem>`_
-using a quantum-classical hybrid solver in the Leap service. 
+using a quantum-classical hybrid solver in the Leap service.
 
 >>> from dwave.optimization.generators import traveling_salesperson
 >>> from dwave.system import LeapHybridNLSampler
@@ -44,11 +77,11 @@ using a quantum-classical hybrid solver in the Leap service.
 ...     [489, 170, 705, 161, 0]]
 ...
 >>> model = traveling_salesperson(distance_matrix=DISTANCE_MATRIX)
->>> sampler = LeapHybridNLSampler()                  
+>>> sampler = LeapHybridNLSampler()
 >>> results = sampler.sample(
 ...     model,
 ...     label='SDK Examples - TSP')  	# doctest: +SKIP
-    
+
 .. end_nl1
 
 
@@ -56,9 +89,9 @@ using a quantum-classical hybrid solver in the Leap service.
 
 The following code creates a constrained quadratic model (CQM) representing
 a `knapsack problem <https://en.wikipedia.org/wiki/Knapsack_problem>`_ and
-solves it using a quantum-classical hybrid solver in the Leap service. 
+solves it using a quantum-classical hybrid solver in the Leap service.
 
->>> from dimod.generators import random_knapsack 
+>>> from dimod.generators import random_knapsack
 >>> from dwave.system import LeapHybridCQMSampler
 ...
 >>> cqm = random_knapsack(10)

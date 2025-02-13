@@ -4,16 +4,14 @@
 Basic Workflow: Models and Sampling
 ===================================
 
-TODO: this is from sources:
-
-* Workflow: Formulation and Sampling 
-  (https://docs.dwavesys.com/docs/latest/c_gs_workflow.html)
-  chapter of https://docs.dwavesys.com/docs/latest/doc_getting_started.html
+This section provides a high-level description of how you solve problems using
+:term:`hybrid` :term:`solver`\ s. For solving problems directly on quantum
+computers, see the :ref:`qpu_workflow` section.
 
 .. include:: ../shared/workflow.rst
     :start-after: start_workflow_intro
     :end-before: end_workflow_intro
-    
+
 .. _opt_workflow_objective_functions:
 
 Objective Functions
@@ -44,38 +42,28 @@ Models
 
 To express your problem as an objective function and submit to a |dwave_short|
 sampler for solution, you typically use one of the quadratic models\ [#]_ or
-nonlinear model\ [#]_ provided by :std:doc:`Ocean software <oceandocs:index>`:
+nonlinear model\ [#]_ provided by :ref:`Ocean software <index_ocean_sdk>`:
 
-*   :ref:`bqm_sdk` are unconstrained\ [#]_ and have binary variables.
+*   .. include:: ../shared/models.rst
+        :start-after: start_models_nonlinear
+        :end-before: end_models_nonlinear
 
-    BQMs are typically used for applications that optimize over decisions that
-    could either be true (or yes) or false (no); for example, should an antenna
-    transmit, or did a network node experience failure?
+*   .. include:: ../shared/models.rst
+        :start-after: start_models_cqm
+        :end-before: end_models_cqm
 
-*   :ref:`cqm_sdk` can be constrained and have binary, integer and real
-    variables.
+*   .. include:: ../shared/models.rst
+        :start-after: start_models_bqm
+        :end-before: end_models_bqm
 
-    CQMs are typically used for applications that optimize problems that might
-    include real, integer and/or binary variables and one or more constraints.
+*   .. include:: ../shared/models.rst
+        :start-after: start_models_dqm
+        :end-before: end_models_dqm
 
-*   :ref:`dqm_sdk` are unconstrained and have discrete variables.
-
-    DQMs are typically used for applications that optimize over several distinct
-    options; for example, which shift should employee X work, or should the
-    state on a map be colored red, blue, green or yellow?
-
-*   :ref:`nl_model_sdk` can be constrained and have binary and integer
-    variables.
-
-    This model is especially suited for use with decision variables that
-    represent a common logic, such as subsets of choices or permutations of
-    ordering. For example, in a
-    `traveling salesperson problem <https://en.wikipedia.org/wiki/Travelling_salesman_problem>`_,
-    permutations of the variables representing cities can signify the order of
-    the route being optimized, and in a
-    `knapsack problem <https://en.wikipedia.org/wiki/Knapsack_problem>`_, the
-    variables representing items can be divided into subsets of packed and not
-    packed.
+.. note::
+    Constraints for unconstrained models are typically represented by adding
+    :ref:`penalty models <concept_penalty>` to the objective, as shown
+    in the :ref:`qpu_example_unconstrained_sat` section.
 
 .. [#]
     Quadratic functions have one or two variables per term. A simple example of
@@ -91,18 +79,13 @@ nonlinear model\ [#]_ provided by :std:doc:`Ocean software <oceandocs:index>`:
     quadratic with a relationship between the variables.
 
     Ocean software also provides support for
-    :ref:`higher order models <oceandocs:higher_order>`, which are typically
-    reduced to quadratic for sampling.
+    :ref:`higher order models <higher_order>`, which are typically reduced to
+    quadratic for sampling.
 
 .. [#]
     The nonlinear model represents a general optimization problem with an
     :term:`objective function` and/or constraints over variables of various
     types.
-
-.. [#]
-    Constraints for such models are typically represented by adding
-    :ref:`penalty models <sysdocs:cb_techniques>` to the objective, as shown
-    in the :ref:`getting_started_formulation_constraints` section.
 
 .. _opt_workflow_samplers:
 
@@ -113,12 +96,13 @@ Samplers
     :start-after: start_samplers
     :end-before: end_samplers
 
-.. _qpu_simple_sampling_example:
+.. _opt_simple_sampling_example:
 
 Simple Sampling Example
 -----------------------
 
 .. |figSimpleRandomSampler| replace:: optSimpleRandomSampler
+.. |simple_objective_example_ref| replace:: :ref:`opt_workflow_simple_obj_example`
 
 .. include:: ../shared/workflow.rst
     :start-after: start_simple_sampler_example
@@ -174,3 +158,4 @@ Sample(sample={'i': 2.0, 'j': 2.0}, energy=-4.0, num_occurrences=1,
 The best (lowest-energy) solution found has :math:`i=j=2` as expected, a
 solution that is feasible because all the constraints (one in this example)
 are satisfied.
+

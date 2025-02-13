@@ -4,6 +4,11 @@
 DQM Solver Parameters
 =====================
 
+This section describes the properties of quantum-classical hybrid
+:ref:`discrete quadratic model <concept_models_dqm>` solvers such as the Leap
+service's ``hybrid_discrete_quadratic_model_version1``. For the parameters
+you can configure, see the :ref:`opt_solver_dqm_parameters` section.
+
 .. _parameter_dqm_dqm:
 
 dqm
@@ -21,7 +26,7 @@ Relevant Properties
     of problem variables.
 *   :ref:`property_dqm_maximum_number_of_biases` defines the maximum number of
     problem biases.
-*   :ref:`property_dqm_minimum_time_limit` and 
+*   :ref:`property_dqm_minimum_time_limit` and
     :ref:`property_dqm_maximum_time_limit_hrs` define the runtime duration for
     hybrid solvers.
 
@@ -72,7 +77,7 @@ Example
 The example in the :ref:`parameter_dqm_dqm` section above sets the
 :ref:`parameter_dqm_label` property.
 
-.. figure:: ../../_images/leap_problem_label.png
+.. figure:: ../_images/leap_problem_label.png
     :align: center
     :name: LeapProblemLabelDqm
     :alt: Problem labels on dashboard.
@@ -101,4 +106,4 @@ Example
 -------
 
 The example in the :ref:`parameter_dqm_dqm` section above sets the
-:ref:`parameter_dqm_time_limit` property.  
+:ref:`parameter_dqm_time_limit` property.

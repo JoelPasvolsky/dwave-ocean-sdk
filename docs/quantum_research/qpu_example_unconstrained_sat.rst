@@ -29,7 +29,7 @@ You can easily verify that the solution to this example problem is
 
 .. math::
 
-	x_1 = x_2=0 \quad \rightarrow \qquad (0 \vee 1) \wedge (1 \vee 0) = 1
+    x_1 = x_2=0 \quad \rightarrow \qquad (0 \vee 1) \wedge (1 \vee 0) = 1
     \wedge 1 = 1 \\
     x_1 {=} 0 \ \ne \ x2 {=} 1 \quad \rightarrow \qquad (0 \vee 0)
     \wedge (1 \vee 1) = 0 \wedge 1 = 0
@@ -53,15 +53,16 @@ Formulating an Objective Function
 =================================
 
 The first step in solving problems on QPU solvers is to formulate an
-objective function. Such an objective, usually in Ising or QUBO format,
-represents good solutions to the problem as low-energy states of the system.
-This subsection shows an intuitive approach to formulating such a QUBO.
+:term:`objective function`. Such an objective, usually in :term:`Ising` or
+:term:`QUBO` format, represents good solutions to the problem as low-energy
+states of the system. This subsection shows an intuitive approach to formulating
+such a QUBO.
 
-For two variables, the :ref:`obj_qubo` formulation reduces to,
+For two variables, the :ref:`qpu_qubo_ising_qubo` formulation reduces to,
 
 .. math::
 
-	\text{E}(a_i, b_{i,j}; q_i) = a_1 q_1 + a_2 q_2 + b_{1,2} q_1 q_2,
+    \text{E}(a_i, b_{i,j}; q_i) = a_1 q_1 + a_2 q_2 + b_{1,2} q_1 q_2,
 
 where :math:`a_1` and :math:`a_2`, the linear coefficients, and :math:`b_{1,2}`,
 the quadratic coefficient, are the programmable parameters you need to set so
@@ -92,8 +93,8 @@ energy.
 First, notice that when :math:`q_1` and :math:`q_2` both equal
 0---state 1---the value of the objective function is 0 for any value of the
 coefficients. To favor this state, you should formulate the objective function
-to have a global minimum energy (the *ground state* energy of the system) equal
-to 0. Doing so ensures that state 1 is a good solution.
+to have a global minimum energy (the :term:`ground state` energy of the system)
+equal to 0. Doing so ensures that state 1 is a good solution.
 
 Second, you penalize states 2 and 3 relative to state 1. One way to do this is
 to set both :math:`a_1` and :math:`a_2` to a positive value such as 0.1\ [#]_.
@@ -101,22 +102,22 @@ Doing so sets the the value of the objective function for those two states to
 :math:`0.1`.
 
 .. [#]
-    Why not :math:`0.2` or :math:`0.5`? The :ref:`getting_started_advanced`
-    chapter looks at scaling the problem values.
+    Why not :math:`0.2` or :math:`0.5`? The :ref:`qpu_basic_config` section
+    looks at scaling the problem values.
 
 Third, you also favor state 4 along with state 1. Given that for state 4, your
 objective function so far is
 
 .. math::
 
-	\text{E}(a_i=0.1, b_{i,j}; q_i=1) = 0.2 + b_{1,2},
+    \text{E}(a_i=0.1, b_{i,j}; q_i=1) = 0.2 + b_{1,2},
 
 you can do this by setting the quadratic coefficient :math:`b_{1,2} = -0.2`.
 The resulting objective function is
 
 .. math::
 
-	\text{E}(q_i) = 0.1 q_1 + 0.1 q_2 - 0.2 q_1 q_2,
+    \text{E}(q_i) = 0.1 q_1 + 0.1 q_2 - 0.2 q_1 q_2,
 
 and the table of possible outcomes is shown below.
 
@@ -135,7 +136,7 @@ Minor Embedding
 You can represent this QUBO as the graph shown in
 :numref:`Figure %s <obj-xnor>`.
 
-.. figure:: ../../_images/obj-xnor.png
+.. figure:: ../_images/obj-xnor.png
     :name: obj-xnor
     :scale: 50 %
     :alt: Objective function for XNOR gate.

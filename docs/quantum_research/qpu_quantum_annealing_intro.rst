@@ -7,7 +7,7 @@ What is Quantum Annealing?
 This section explains what quantum annealing is and how it works, and
 introduces the underlying quantum physics that governs its behavior. For more
 in-depth information on quantum annealing in |dwave_short| quantum computers,
-see |doc_processor|_.
+see the :ref:`qpu_annealing` section.
 
 Applicable Problems
 ===================
@@ -52,10 +52,11 @@ Sampling from energy-based distributions is a computationally intensive task
 that is an excellent match for the way that the |dwave_short| quantum computer
 solves problems; that is, by seeking low-energy states.
 
-You can see a variety of example problems in the |doc_cookbook|_ guide,
-in |dwave_short|'s
+You can see a variety of example problems in the
+:ref:`qpu_index_examples_beginner` and :ref:`qpu_index_examples_advanced`
+sections, in |dwave_short|'s
 `code examples repository <https://github.com/dwave-examples>`_
-on GitHub, and the many user-developed early quantum applications on 
+on GitHub, and the many user-developed early quantum applications on
 |dwave_short| systems shown on the |dwave_short|_ website.
 
 How Quantum Annealing Works in |dwave_short| QPUs
@@ -70,7 +71,7 @@ also be in a superposition of the 0 state and the 1 state at the same time. At
 the end of the quantum annealing process, each qubit collapses from a
 superposition state into either 0 or 1 (a classical state).
 
-.. figure:: ../../_images/01.png
+.. figure:: ../_images/01.png
     :name: superp
     :scale: 33 %
     :alt: A qubit's state is implemented in a circulating current with a
@@ -91,11 +92,11 @@ of equal energy minima; thus the qubit has a 50/50 chance of being in either
 valley at the end of the anneal---that is, in the classical state of either 0
 or 1.
 
-.. figure:: ../../_images/simple_anneal_one_qubit_without_h.png
+.. figure:: ../_images/simple_anneal_one_qubit_without_h.png
     :name: anneal_one_qubit_no_h
     :alt: Annealing process's energy diagram shows raising the energy barrier
-        for a single qubit, resulting in a 50/50 probability of ending
-        in a classical state of 0 or 1.
+        for a single qubit, resulting in a 50/50 probability of ending in a
+        classical state of 0 or 1.
 
     Annealing process's energy diagram shows raising the energy barrier for a
     single qubit, resulting in a 50/50 probability of ending in a classical
@@ -110,7 +111,7 @@ magnetic field tilts the valleys in a preferred direction, increasing the
 probability of the qubit ending up in the valley with the lower energy
 minimum---here, the classical state of 1.
 
-.. figure:: ../../_images/simple_anneal_one_qubit_with_h.png
+.. figure:: ../_images/simple_anneal_one_qubit_with_h.png
     :name: anneal_one_qubit_with_h
     :alt: Annealing process's energy diagram shows an external magnetic field
         being applied to a single qubit, resulting in a higher probability
@@ -137,7 +138,7 @@ relative energy of each state depends on the biases of qubits and the couplers
 between them. During the anneal, the qubit states are potentially entangled in
 this landscape before finally settling into (1,1) at the end of the anneal.
 
-.. figure:: ../../_images/4states.png
+.. figure:: ../_images/4states.png
     :name: 4states
     :scale: 45 %
     :alt: Energy diagram showing the best answer.
@@ -171,7 +172,7 @@ Underlying Quantum Physics
 This section discusses some concepts essential to understanding
 the quantum physics that governs the |dwave_short| quantum annealing process.
 
-.. _gs_hamiltonian:
+.. _qpu_quantum_annealing_intro_hamiltonian:
 
 The Hamiltonian and the Eigenspectrum
 -------------------------------------
@@ -198,7 +199,7 @@ For the |dwave_short| quantum computer, the Hamiltonian may be represented as
 
 .. math::
 
-	{\cal H}_{ising} = \underbrace{- \frac{A({s})}{2} 
+    {\cal H}_{ising} = \underbrace{- \frac{A({s})}{2}
     \left(\sum_i {\hat\sigma_{x}^{(i)}}\right)}_\text{Initial Hamiltonian} +
     \underbrace{\frac{B({s})}{2} \left(\sum_{i} h_i {\hat\sigma_{z}^{(i)}} +
     \sum_{i>j} J_{i,j} {\hat\sigma_{z}^{(i)}}
@@ -210,7 +211,7 @@ coupling strengths.\ [#]_
 
 .. [#]
     Nonzero values of :math:`h_i` and :math:`J_{i,j}` are limited to those
-    available in the working graph; see the :ref:`getting_started_topologies`
+    available in the working graph; see the :ref:`qpu_topologies`
     chapter.
 
 The Hamiltonian is the sum of two terms, the *initial Hamiltonian* and the
@@ -243,7 +244,7 @@ annealing process. The lowest energy state during the anneal---the
 *ground state*---is typically shown at the bottom, and any higher excited states
 are above it; see :numref:`Figure %s <eigenspectrum>`.
 
-.. figure:: ../../_images/eigenspectrum.png
+.. figure:: ../_images/eigenspectrum.png
     :name: eigenspectrum
     :scale: 55 %
     :alt: Eigenspectrum, where the ground state is at the bottom and the higher
@@ -260,7 +261,7 @@ into one of the excited states. There is a point during the anneal where the
 first excited state---that with the lowest energy apart from the ground
 state---approaches the ground state closely and then diverges away again. The
 minimum distance between the ground state and the first excited state throughout
-any point in the anneal is called the *minimum gap*.
+any point in the anneal is called the :term:`minimum gap`.
 
 Certain factors may cause the system to jump from the ground state into a higher
 energy state. One is thermal fluctuations that exist in any physical system.
@@ -282,7 +283,8 @@ Evolution of Energy States
 --------------------------
 
 :numref:`Figure %s <annealing-functions-gsg>` shows the dependence of the
-:math:`A` and :math:`B` parameters in the :ref:`Hamiltonian <gs_hamiltonian>` on
+:math:`A` and :math:`B` parameters in the
+:ref:`Hamiltonian <qpu_quantum_annealing_intro_hamiltonian>` on
 s, the normalized anneal fraction, an abstract parameter ranging from 0 to 1.
 The :math:`A(s)` curve is the tunneling energy and the :math:`B(s)` curve is the
 problem Hamiltonian energy at :math:`s`. Both are expressed as energies in units
@@ -300,7 +302,7 @@ list of qubit states that are either 0 or 1) corresponds to an eigenstate and
 the eigenenergy is the classical energy objective function you have input into
 the system.
 
-.. figure:: ../../_images/annealing-functions.png
+.. figure:: ../_images/annealing-functions.png
     :name: annealing-functions-gsg
     :height: 400 pt
     :width: 400 pt
@@ -324,6 +326,5 @@ controls can improve both optimization and sampling performance for certain
 types of problems, and can help investigate what is happening partway through
 the annealing process.
 
-For more information about the available annealing controls, see
-|doc_processor|_.
-
+For more information about the available annealing controls, see the
+:ref:`qpu_annealing` section.

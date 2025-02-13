@@ -4,12 +4,9 @@
 Basic Workflow: Formulation and Sampling
 ========================================
 
-TODO: this is from sources:
-
-* Workflow: Formulation and Sampling 
-  (https://docs.dwavesys.com/docs/latest/c_gs_workflow.html)
-  chapter of https://docs.dwavesys.com/docs/latest/doc_getting_started.html
-  
+This section provides a high-level description of how you solve problems using
+quantum computers directly. For solving problems with :term:`hybrid`
+:term:`solver`\ s, see the :ref:`opt_workflow` section.
 
 .. include:: ../shared/workflow.rst
     :start-after: start_workflow_intro
@@ -44,10 +41,10 @@ Models
 ======
 
 To express your problem as an objective function and submit to a |dwave_short|
-sampler for solution, you typically use one of the quadratic models\ [#]_ 
+sampler for solution, you typically use one of the quadratic models\ [#]_
 provided by :std:doc:`Ocean software <oceandocs:index>`:
 
-*   :ref:`bqm_sdk` are unconstrained\ [#]_ and have binary variables.
+*   :ref:`concept_models_bqm` are unconstrained\ [#]_ and have binary variables.
 
     BQMs are typically used for applications that optimize over decisions that
     could either be true (or yes) or false (no); for example, should an antenna
@@ -90,6 +87,7 @@ Simple Sampling Example
 -----------------------
 
 .. |figSimpleRandomSampler| replace:: qpuSimpleRandomSampler
+.. |simple_objective_example_ref| replace:: :ref:`qpu_workflow_simple_obj_example`
 
 .. include:: ../shared/workflow.rst
     :start-after: start_simple_sampler_example
@@ -97,7 +95,7 @@ Simple Sampling Example
 
 .. _qpu_workflow_simple_example:
 
-Simple Workflow Example
-=======================
+.. todo:: add example: Simple Workflow Example
 
-TODO: add example
+    Simple Workflow Example
+    =======================
