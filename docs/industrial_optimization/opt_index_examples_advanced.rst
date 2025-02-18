@@ -9,11 +9,11 @@ Hybrid Usage Examples
     :hidden:
 
     opt_example_bqm_structuralimbalance
-    opt_example_kerberos_map
     opt_example_dqm_map
+    opt_example_kerberos_map
     opt_example_dwavehybrid_manyvariables
 
-For beginner examples, see the :ref:`opt_index_examples_beginner` section. 
+For beginner examples, see the :ref:`opt_index_examples_beginner` section.
 
 Quadratic Models
 ================
@@ -23,20 +23,22 @@ Quadratic Models
 
     .. grid-item-card:: :ref:`opt_example_bqm_structuralimbalance`
 
-        Solves an unconstrained problem using a Leap hybrid :term:`BQM` solver.
-
-    .. grid-item-card:: :ref:`opt_example_kerberos_map`
-
-        Demonstrates using an out-of-the-box Ocean hybrid solver.
+        Solves an unconstrained problem using the
+        `Leap <https://cloud.dwavesys.com/leap/>`_ service's :term:`BQM` solver.
 
     .. grid-item-card:: :ref:`opt_example_dqm_map`
 
-        Solves a discrete quadratic model (:term:`DQM`) using a
-    	Leap hybrid DQM solver.
+        Solves a discrete quadratic model (:term:`DQM`) using the Leap service's
+        :term:`DQM` solver.
+
+    .. grid-item-card:: :ref:`opt_example_kerberos_map`
+
+        Demonstrates using a :ref:`dwave-hybrid <index_hybrid>` out-of-the-box
+        hybrid solver.
 
     .. grid-item-card:: :ref:`opt_example_dwavehybrid_manyvariables`
 
-        Builds a hybrid workflow and solver for a large graph problem.
+        Builds a hybrid workflow and solver for a large random-graph problem.
 
 Demos
 =====
@@ -81,8 +83,8 @@ Jupyter Notebooks
 These examples, in a web-based interactive environment that includes documentation
 and code, are helpful for both walking beginners through the theory and practice
 of problem solving and explaining complex features. They can also serve as
-a framework in which to develop your own code. 
- 
+a framework in which to develop your own code.
+
 .. grid:: 3
     :gutter: 2
 
