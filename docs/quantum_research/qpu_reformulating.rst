@@ -578,7 +578,7 @@ SAT is satisfied only if all its clauses are satisfied.
         i.e., (clause 1) :math:`\wedge` (clause 2).
 
 The
-:ref:`Simple Satisfiability (SAT) Example <qpu_example_unconstrained_sat>`
+:ref:`Simple Satisfiability (SAT) Example <qpu_example_sat_unconstrained>`
 of the :ref:`qpu_index_examples_beginner` section demonstrates an intuitive
 formulation of a small SAT as a BQM. This section provides a more methodological
 approach.
@@ -2634,6 +2634,8 @@ To solve the circuit of this example, that is, to find a minimum-sized set of
 gates that, if faulty, explains the observation of incorrect outputs, this
 objective function must be minimized while holding constant the input values
 :math:`x_1,x_2,x_3=1,1,1` and incorrect output values :math:`z_1,z_2=1,0`.
+
+.. _qpu_reformulating_onehot_domainwall:
 
 Example Constraints: One-Hot, Domain-Wall, :math:`n \choose k`
 ==============================================================
