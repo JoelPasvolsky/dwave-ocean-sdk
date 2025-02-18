@@ -23,18 +23,21 @@ to our systems.
     :gutter: 2
 
     .. grid-item-card:: :ref:`leap_index_rns`
+        :img-top: /_images/release_notes_icon.svg
         :link: leap_index_rns
         :link-type: ref
 
         System release notes, fixed and open issues.
 
     .. grid-item-card:: :ref:`leap_dev_env`
+        :img-top: /_images/ide_icon.svg
         :link: leap_dev_env
         :link-type: ref
 
         Description of Leap support for third-party IDEs.
 
     .. grid-item-card:: :ref:`leap_admin`
+        :img-top: /_images/leap_admin_icon.svg
         :link: leap_admin
         :link-type: ref
 
@@ -42,6 +45,7 @@ to our systems.
         to projects in Leap.
 
     .. grid-item-card:: :ref:`leap_sapi_rest`
+        :img-top: /_images/rest_api_icon.svg
         :link: leap_sapi_rest
         :link-type: ref
 
