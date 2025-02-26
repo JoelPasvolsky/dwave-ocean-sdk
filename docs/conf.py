@@ -130,6 +130,8 @@ breathe_projects = {"minorminer": os.path.join(
                       sdk_directory, 'dimod/docs/build-cpp/xml/'),
                     "dwave-preprocessing": os.path.join(
                       sdk_directory, 'dwave-preprocessing/docs/build-cpp/xml/'),
+                    "dwave-optimization": os.path.join(
+                      sdk_directory, 'dwave-optimization/docs/build/doxygen/xml/'),
                     }
 
 breathe_default_members = ('members', )
@@ -141,6 +143,7 @@ if os.environ.get('READTHEDOCS', False):
     subprocess.call('cd ../dimod/docs/; make cpp', shell=True)
     subprocess.call('cd ../dwave-preprocessing/docs/; make cpp', shell=True)
     subprocess.call('cd ../dwave-gate/; python dwave/gate/simulator/operation_generation.py', shell=True)
+    subprocess.call('cd ../dwave-optimization/docs/; make cpp', shell=True)
 
 # we want to build the c++ docs in CircleCI without warnings
 # and without minorminer because it generates ~500 warnings
@@ -152,6 +155,7 @@ if os.environ.get('CI', False):
     subprocess.call('cd ../dimod/docs/; make cpp > /dev/null 2>&1', shell=True)
     subprocess.call('cd ../dwave-preprocessing/docs/; make cpp > /dev/null 2>&1', shell=True)
     subprocess.call('cd ../dwave-gate/; python dwave/gate/simulator/operation_generation.py', shell=True)
+    subprocess.call('cd ../dwave-optimization/docs/; make cpp > /dev/null 2>&1', shell=True)
 
 autodoc_type_aliases = {
     'numpy.typing.ArrayLike': 'numpy.typing.ArrayLike',
