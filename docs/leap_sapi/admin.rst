@@ -1473,6 +1473,9 @@ Viewing the Status of Problem Submissions
 To view the status of problems submitted to a project's solvers, go to the
 **Problem Status** tab.
 
+.. note:: Up to 1000 of a Leap account's newest problem submissions are stored
+    and accessible for up to 365 days.
+
 .. tip::
 
     *   To display the most up-to-date status, click **Refresh Table**.
