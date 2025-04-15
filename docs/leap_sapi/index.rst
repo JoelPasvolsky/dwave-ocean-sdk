@@ -13,9 +13,8 @@ Leap Service
     sapi_rest
     Leap Service Release Notes <https://docs.dwavequantum.com/projects/leap_sapi/en/latest/index.html>
 
-Launched in 2018, the |cloud_tm| quantum cloud service from |dwave_short|_
-brings quantum computing to the real world by providing real-time cloud access
-to our systems.
+The |cloud_tm| quantum cloud service provides real-time cloud access to
+|dwave_short|_ quantum computers and :term:`hybrid` :term:`solvers <solver>`.
 
 .. sections-start-marker
 
@@ -66,16 +65,14 @@ The Leap service hosts |dwave_short|'s :term:`solvers <solver>`, including
 quantum computers and :term:`hybrid` solvers. It enables you to do the
 following:
 
-*   Submit problems and view results and usage statistics.
-
+*   Submit problems and view results and usage statistics
+*   Administer projects
 *   Find learning resources: a `Community page <https://support.dwavesys.com/>`_
     where you can pose questions and provide answers to other users,
     a `Resources page <https://cloud.dwavesys.com/leap/resources/demos/>`_ with
     interactive demos and a searchable collection of examples, and a
     `Help Center <https://support.dwavesys.com/>`_ for frequently asked
-    questions (FAQ) section and a searchable knowledge base.
-
-*   `Administer projects <https://cloud.dwavesys.com/leap/admin>`_.
+    questions (FAQ) section and a searchable knowledge base
 
 Sign up for the Leap service here: https://cloud.dwavesys.com/leap.
 
@@ -83,23 +80,22 @@ Dashboard
 ---------
 
 The dashboard is the home for your experience using the Leap service and
-contains a considerable amount of useful information. For example, you can
-manage your account settings and see the status of problems you have submitted,
-usage statistics, solver status, a summary of your account, and your active
-project and its associated API token.
+contains a considerable amount of useful information, some of which you can also
+update; for example:
+
+*   Your account settings and a summary of your account
+*   Your active project and its associated API token
+*   Status of problems you have submitted and usage statistics
+*   Solver status
 
 You might be a member of multiple projects, but the information displayed on the
 dashboard is only for the active project; for example, the solvers that have
-been assigned to the active project.
+been assigned to the active project. You can make a different project active by
+selecting *your_user_name* > **Projects** > *project*.
 
 The Leap service supports solvers in multiple regions (for example, North
 America and Europe). The dashboard displays the solvers that are available by
 region.
-
-.. note::
-
-    You can make a different project active by selecting
-    *your_user_name* > **Projects** > *project*.
 
 Solver Access
 =============
