@@ -6,6 +6,8 @@ sphinx-hoverxref==1.4.2
 reno[sphinx]==3.3.0
 numpy~=2.0
 
+dwave-experimental
+
 # needed for some of the examples
 matplotlib
 
