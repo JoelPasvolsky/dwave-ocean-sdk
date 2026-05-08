@@ -417,8 +417,8 @@ As in statistical mechanics, :math:`\beta` represents inverse temperature:
 :math:`1/(k_B T)`, where :math:`T` is the thermodynamic temperature in kelvin
 and :math:`k_B` is Boltzmann's constant.
 
-The |dwave_short| QPU operates at cryogenic temperatures, nominally
-:math:`15`\ |nbsp|\ mK, which can be translated to a scale parameter
+The |dwave_short| QPU generally operates at cryogenic temperatures below
+:math:`20`\ |nbsp|\ mK, which can be translated to a scale parameter
 :math:`\beta`. The effective value of :math:`\beta` varies from QPU to QPU and
 in fact from problem to problem since the |dwave_short| QPU samples are not
 Boltzmann and time-varying phenomena may affect samples. Therefore, to attain
