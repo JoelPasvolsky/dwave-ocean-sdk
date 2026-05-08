@@ -6,10 +6,6 @@
 
 .. meta::
     :description: D-Wave documentation
-    :keywords: D-Wave, d-wave documentation, d-wave manuals, quantum computing,
-        quantum annealing, optimization, machine learning, sampling, ising
-        model, qubo, hamiltonian, hybrid, leap, quantum applications, qubits,
-        quantum computing manuals, d-wave user guides, quantum computing howto
 
 .. toctree::
     :hidden:

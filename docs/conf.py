@@ -380,17 +380,19 @@ rst_epilog = """
 
 .. |adv2| unicode:: Advantage2
 .. |adv2_tm| unicode:: Advantage2 U+2122
+.. |adv3| unicode:: Advantage3
+.. |adv3_tm| unicode:: Advantage3 U+2122
 .. |cloud| unicode:: Leap
 .. _cloud: https://cloud.dwavesys.com/leap
 .. |cloud_tm| unicode:: Leap U+2122
 .. _cloud_tm: https://cloud.dwavesys.com/leap
-.. |dwave_2kq| unicode:: D-Wave U+00A0 2000Q
+.. |dwave_2kq| unicode:: D U+2011 Wave U+00A0 2000Q
 .. |dwave_5kq| unicode:: Advantage
 .. |dwave_5kq_tm| unicode:: Advantage U+2122
-.. |dwave_short| unicode:: D-Wave
+.. |dwave_short| unicode:: D U+2011 Wave
 .. _dwave_short: https://dwavequantum.com
-.. |dwave_short_tm| unicode:: D-Wave U+2122 U+0020
-.. |dwave_system| unicode:: D-Wave U+00A0 System
+.. |dwave_short_tm| unicode:: D U+2011 Wave U+2122 U+0020
+.. |dwave_system| unicode:: D U+2011 Wave U+00A0 System
 .. |ocean_tm| unicode:: Ocean U+2122
 .. |ocean_sdk| replace:: Ocean software
 .. _ocean_sdk: https://github.com/dwavesystems/dwave-ocean-sdk
@@ -407,7 +409,7 @@ rst_epilog = """
 .. |nlstride_short| unicode:: Stride U+00A0 solver
 .. |nlstride_tm| unicode:: Stride U+2122 U+00A0 hybrid U+00A0 solver
 
-.. |support_email| replace:: D-Wave Customer Support
+.. |support_email| replace:: D U+2011 Wave Customer Support
 .. _support_email: support@dwavesys.com
 
 .. |doc_operations| replace:: *D-Wave Quantum Computer Operations*
