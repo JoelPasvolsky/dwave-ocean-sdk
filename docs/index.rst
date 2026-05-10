@@ -125,7 +125,7 @@ Welcome to |dwave_short|
         :ref:`qpu_quantum_annealing_intro` section.
 
         Quantum annealing is implemented in |dwave_short|'s generally available
-        quantum computers, such as the |dwave_5kq_tm| system, as a single
+        quantum computers, such as the |dwave_5kq_tm| and |adv2_tm| systems, as a single
         quantum algorithm, and this scalable approach to quantum computing has
         enabled us to create quantum processing units (:term:`QPUs <QPU>`) with
         more than 5000 quantum bits (:term:`qubits <qubit>`)---far beyond the
