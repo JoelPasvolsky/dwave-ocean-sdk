@@ -44,7 +44,7 @@ The :ref:`opt_developing_quantum_applications` section describes the process
 used by |dwave_short| and other companies to develop successful quantum
 applications, which includes such steps as identifying problems that can benefit
 from quantum technology, describing such problems in a way that enables
-developers to model it, developing mathematical models, and implementing code.
+developers to model them, developing mathematical models, and implementing code.
 
 The :ref:`opt_model_construction_nl` section explains the nonlinear model.
 
@@ -82,6 +82,7 @@ nonlinear models to the |nlstride_short|. Submit the CVRP model to the selected
 solver.
 
 >>> from dwave.system import LeapHybridNLSampler
+...
 >>> with LeapHybridNLSampler() as sampler:          # doctest: +SKIP
 ...     print(sampler.solver.name)
 ...     results = sampler.sample(

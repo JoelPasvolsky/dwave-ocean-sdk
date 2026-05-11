@@ -23,8 +23,8 @@ For an introduction to Ocean software's nonlinear model, see the
 
 .. _concept_models_bqm:
 
-Binary Quadratic Models
-=======================
+Binary Quadratic Model
+======================
 
 .. include:: ../shared/models.rst
     :start-after: start_models_bqm
