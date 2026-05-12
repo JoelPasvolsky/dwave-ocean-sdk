@@ -9,10 +9,10 @@ natively.
 This model is especially suited for use with :term:`decision variables` that
 represent a common logic, such as subsets of choices or permutations of
 ordering. For example, in a
-`traveling salesperson problem <https://en.wikipedia.org/wiki/Travelling_salesman_problem>`_
+`traveling salesperson problem <https://en.wikipedia.org/wiki/Travelling_salesman_problem>`_,
 permutations of the variables representing cities can signify the order of the
-route being optimized and in a
-`knapsack problem <https://en.wikipedia.org/wiki/Knapsack_problem>`_ the
+route being optimized, and, in a
+`knapsack problem <https://en.wikipedia.org/wiki/Knapsack_problem>`_, the
 variables representing items can be divided into subsets of packed and not
 packed. The design principles and major features of this solver are described in
 the :ref:`dwave-optimization philosophy <optimization_philosophy>` page.

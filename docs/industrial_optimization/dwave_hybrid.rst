@@ -10,9 +10,8 @@ resources:
 *   |cloud|_ service solvers
 
     Quantum-classical hybrid solvers intended to solve arbitrary application
-    problems. The |nlstride_tm| solver is described in the
-    :ref:`opt_leap_hybrid` section; additional supported solvers are described
-    below.
+    problems. The |nlstride_tm| is described in the :ref:`opt_leap_hybrid`
+    section; additional supported solvers are described below.
 *   :ref:`dwave-hybrid <index_hybrid>` samplers
 
     A Python framework for building a variety of flexible hybrid workflows. The
@@ -32,9 +31,9 @@ service. Check your dashboard to see which hybrid solvers are available to you.
 .. note::
     Not all accounts have access to all types of solver.
 
-In addition to the hybrid nonlinear solver, also known as the Stride solver,
-described in the :ref:`opt_leap_hybrid` section, generally available hybrid
-solvers currently supported include:
+In addition to the hybrid nonlinear solver, also known as the |nlstride__short|,
+described in the :ref:`opt_leap_hybrid` section, the following hybrid solvers
+are also currently supported:
 
 *   Hybrid CQM solver (e.g., ``hybrid_constrained_quadratic_model_version1``)
 
@@ -92,10 +91,10 @@ parameters of the hybrid solvers in the Leap service.
     *   -   :ref:`Constrained quadratic models <concept_models_cqm>`
         -   :ref:`opt_solver_cqm_properties`
         -   :ref:`opt_solver_cqm_parameters`
-    *   -   :ref:`Constrained quadratic models <concept_models_bqm>`
+    *   -   :ref:`Binary quadratic models <concept_models_bqm>`
         -   :ref:`opt_solver_bqm_properties`
         -   :ref:`opt_solver_bqm_parameters`
-    *   -   :ref:`Nonlinear models <concept_models_dqm>`
+    *   -   :ref:`Discrete quadratic models <concept_models_dqm>`
         -   :ref:`opt_solver_dqm_properties`
         -   :ref:`opt_solver_dqm_parameters`
 

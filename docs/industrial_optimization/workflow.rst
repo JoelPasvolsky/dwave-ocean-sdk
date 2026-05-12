@@ -38,8 +38,8 @@ solution by sampling.
 Supported Models
 ----------------
 
-To express your problem as an objective function and submit to a |dwave_short|
-:term:`hybrid` sampler for solution, you typically use
+To express your problem as an objective function that you can submit to a
+|dwave_short| :term:`hybrid` sampler for solution, you typically use
 :ref:`Ocean software's <index_ocean_sdk>` nonlinear model.
 
 .. include:: ../shared/models.rst
@@ -91,7 +91,7 @@ Simple Workflow Example
 
 This example uses :ref:`Ocean software <index_ocean_sdk>` tools to
 demonstrate the solution workflow described in this section on a simple problem
-of of finding the minimum of a function of an integer variable, the polynomial
+of finding the minimum of a function of an integer variable, the polynomial
 :math:`y = i^2 - 4i`.
 
 .. figure:: ../_images/simple_polynomial_minimization.png
@@ -105,7 +105,7 @@ of of finding the minimum of a function of an integer variable, the polynomial
     Minimum point of a simple polynomial, :math:`y = i^2 - 4i`.
 
 The :ref:`dwave-optimization <index_optimization>` package can formulate the
-problem as nonlinear model as follows:
+problem as a nonlinear model as follows:
 
 >>> from dwave.optimization import Model
 ...
