@@ -31,7 +31,7 @@ service. Check your dashboard to see which hybrid solvers are available to you.
 .. note::
     Not all accounts have access to all types of solver.
 
-In addition to the hybrid nonlinear solver, also known as the |nlstride__short|,
+In addition to the hybrid nonlinear solver, also known as the |nlstride_short|,
 described in the :ref:`opt_leap_hybrid` section, the following hybrid solvers
 are also currently supported:
 
