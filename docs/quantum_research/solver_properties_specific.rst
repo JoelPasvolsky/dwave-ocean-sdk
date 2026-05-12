@@ -45,6 +45,9 @@ This information includes:
         :ref:`seat type <admin_def_seat_type>` in a project, you may not have
         access to all QPUs in the Leap service.
 
+.. note::
+    Your account might not have access to all solvers shown here.
+
 
 Advantage2_system1
 ==================
@@ -151,10 +154,10 @@ The standard annealing schedule for the QPU is shown in
     as a function of scaled time.
 
 
-Advantage2_system2.1
-====================
+Advantage2_system2
+==================
 
-All data presented in this section are specific to the **Advantage2_system2.1**
+All data presented in this section are specific to the **Advantage2_system2**
 solver. The |adv2| system QPU is based on a physical lattice of qubits and
 couplers known as the *Zephyr* topology. For information, see the
 :ref:`topology_intro_zephyr` section.
@@ -244,13 +247,13 @@ Annealing Schedule
 ------------------
 
 Download the annealing schedule for the QPU here:
-:download:`Advantage2_system2.1 Excel spreadsheet <../downloadables/09-1324A-A_Advantage2_system2_1_annealing_schedule.xlsx>`.
+:download:`Advantage2_system2 Excel spreadsheet <../downloadables/09-1324A-B_Advantage2_system2_annealing_schedule.xlsx>`.
 
 The standard annealing schedule for the QPU is shown in
-:numref:`Figure %s <annealing-schedule-adv2-2.1>`.
+:numref:`Figure %s <annealing-schedule-adv2-sys2>`.
 
-.. figure:: ../_images/annealing-schedule-adv2-2.1.png
-    :name: annealing-schedule-adv2-2.1
+.. figure:: ../_images/annealing-schedule-adv2-sys2.png
+    :name: annealing-schedule-adv2-sys2
 
     Standard annealing schedule for the QPU, showing energy changes
     as a function of scaled time.
@@ -808,7 +811,19 @@ and available through the Ocean SDK.
     *   -   Advantage2_system1.1
         -   :ref:`2025-05-20 <doc-898>`
         -   First solver release
-        
+
+    *   -   **Advantage2_system2**
+        -
+        -
+
+    *   -   Advantage2_system2
+        -   :ref:`2026-05-12 <doc-1066>`
+        -   Name change
+
+    *   -   Advantage2_system2.1
+        -   2025-11-06
+        -   First solver release
+
     *   -   **Advantage2_system4**
         -
         -
